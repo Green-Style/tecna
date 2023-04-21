@@ -16,7 +16,7 @@ class WelcomeScreen extends StatelessWidget {
         skip: const Text('Pular'), // TODO: Add theme style
         next: const Icon(Icons.arrow_forward_rounded),
         dotsDecorator: DotsDecorator(
-          activeColor: activeColor,
+          activeColor: Theme.of(context).primaryColor,
           activeSize: const Size(22, 10),
           activeShape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24)

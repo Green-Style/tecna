@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Green Style',
       theme: ThemeData(
-        scaffoldBackgroundColor: scaffoldBackgroundColor,
-        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: lightBackgroundColor,
+        primarySwatch: Colors.green,
       ),
       home: WelcomeScreen(generalInfo: [ // TODO: Remove test objects and receive from API
         GeneralInfo(id: 'asd', description: 'sdasdasdasd', categoryId: 0),

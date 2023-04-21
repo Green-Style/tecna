@@ -1,17 +1,17 @@
 {
     "logs": [
         {
-            "outputFile": "/home/lanus/projects/tecna/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-night-v8/values-night-v8.xml",
+            "outputFile": "C:\\Users\\rilary.santos\\Documents\\Rilary\\Ftc\\Green style\\App\\Teste\\tecna\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
             "map": [
                 {
-                    "source": "/home/lanus/projects/tecna/android/app/src/main/res/values-night/styles.xml",
+                    "source": "C:\\Users\\rilary.santos\\Documents\\Rilary\\Ftc\\Green style\\App\\Teste\\tecna\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
-                        "startOffsets": "172,817",
+                        "startOffsets": "175,831",
                         "endLines": "7,16",
                         "endColumns": "12,12",
-                        "endOffsets": "475,981"
+                        "endOffsets": "482,997"
                     },
                     "to": {
                         "startLines": "2,7",
