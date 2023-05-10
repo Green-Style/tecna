@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:green_style/src/constants.dart';
 
 class ResetPasswordPage extends StatefulWidget {
   @override
@@ -15,6 +16,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
       appBar: AppBar(
         title: Text('Recuperar senha'),
       ),
+      bottomNavigationBar: GreenStyleBottomNavigationBar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -51,17 +53,17 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
               //   width: double.infinity,
               //   child: ElevatedButton(
               //     onPressed: () {
-              //           if (_formKey.currentState != null && _formKey.currentState.validate()) {
-              //           _formKey.currentState.save();
-              //           }
-              //         // TODO: send password reset link to the user's email address
-              //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              //           content: Text('Link para recuperação de senha enviado para $_email'),
-              //         ));
+              //       if (_formKey.currentState != null && _formKey.currentState.validate()) {
+              //         _formKey.currentState.save();
               //       }
-              //     },
-              //     child: Text('Enviar link para recuperação de senha'),
-              //   ),
+              //       // TODO: send password reset link to the user's email address
+              //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              //         content: Text('Link para recuperação de senha enviado para $_email'),
+              //       ));
+              //     }
+              //   },
+              //   child: Text('Enviar link para recuperação de senha'),
+              // ),
                ),
             ],
           ),

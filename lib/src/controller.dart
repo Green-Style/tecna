@@ -1,0 +1,1 @@
+export './controller/welcome_controller.dart';

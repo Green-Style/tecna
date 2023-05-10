@@ -5,15 +5,15 @@ class GeneralInfo {
 
   GeneralInfo({
     required this.id,
+    required this.description,
     this.categoryId = 0,
-    this.description = '',
   });
 
   factory GeneralInfo.fromJson(Map<String, dynamic> json) {
     return GeneralInfo(
-      id: json['id'] ?? '',
-      categoryId: json['categoryId'] ?? 0,
-      description: json['description'] ?? '',
+      id: json['id'],
+      categoryId: json['categoryId'],
+      description: json['description'],
     );
   }
 }
