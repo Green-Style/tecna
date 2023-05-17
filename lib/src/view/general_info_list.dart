@@ -4,6 +4,7 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'package:green_style/src/controller/welcome_controller.dart';
 
 class GeneralInfoList extends StatelessWidget{
+  GeneralInfoList({super.key});
   final welcomeCtrl = WelcomeController();
 
   Future<List<GeneralInfo>> _getInfo() async {
@@ -19,7 +20,7 @@ class GeneralInfoList extends StatelessWidget{
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
-            return Center(child: const CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           default:
             if (snapshot.hasError) {
               return Text("Error: ${snapshot.error}");
@@ -42,10 +43,9 @@ class GeneralInfoList extends StatelessWidget{
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 onDone: () {
-                  
                   // TODO: Remove comments when login page is complete
                   Navigator.of(context).pushReplacementNamed(
-                    '/resetPassword'
+                    '/home'
                   );
                 },
               );
