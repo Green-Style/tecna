@@ -3,7 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // Text
 const String appName = 'Green Style';
-const String apiUrl = '';
+const String apiUrl = 'greenstyle.brazilsouth.cloudapp.azure.com:1337';
+const String userTokenKey = 'greenStyleUserToken';
 
 // Colors
 const Color lightBackgroundColor = Colors.white;
