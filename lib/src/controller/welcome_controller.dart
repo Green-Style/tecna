@@ -44,7 +44,7 @@ class WelcomeController {
 
     // TODO: Remove after tests
     // Remove - Start
-    return Future.delayed(const Duration(seconds: 10), () {
+    return Future.delayed(const Duration(seconds: 4), () {
       return info;
     });
     // Remove - End
