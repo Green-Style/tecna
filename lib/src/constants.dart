@@ -17,9 +17,19 @@ final greenStyleTheme = ThemeData(
 );
 
 // Complexer widgets
-class GreenStyleBottomNavigationBar extends StatelessWidget {
+class GreenStyleBottomNavigationBar extends StatefulWidget {
+
+
+  @override
+  State<GreenStyleBottomNavigationBar> createState() => _GreenStyleBottomNavigationBarState();
+}
+
+class _GreenStyleBottomNavigationBarState extends State<GreenStyleBottomNavigationBar> {
+  int _currentIndex = 0;
+
   @override Widget build(BuildContext context) {
     return BottomNavigationBar(
+      currentIndex: _currentIndex,
       items: const [
         BottomNavigationBarItem(
           icon: FaIcon(FontAwesomeIcons.house),
@@ -39,7 +49,12 @@ class GreenStyleBottomNavigationBar extends StatelessWidget {
         ),
       ],
       selectedItemColor: buttonBackgroundColor,
+      unselectedItemColor: Colors.grey,
       onTap: (index) {
+        setState(() {
+          _currentIndex = index;
+        });
+
         switch (index) {
           case 0:
             Navigator.of(context).pushReplacementNamed(
