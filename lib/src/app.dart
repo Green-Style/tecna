@@ -1,3 +1,4 @@
+import 'package:green_style/src/view/screens/home.dart';
 import 'package:green_style/src/view/screens/reset_password.dart';
 import 'package:green_style/src/view/screens/welcome.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class _MyAppState extends State<MyApp> {
       home: const WelcomeScreen(),
       // TODO: Criar rotas após terminar telas
       routes: {
-      //   '/': (context) => HomeScreen(),
+        '/home': (context) => HomePage(),
       //   '/login': (context) => LoginScreen(),
         '/resetPassword': (context) => ResetPasswordPage(),
       //   '/register': (context) => RegisterPage(),
