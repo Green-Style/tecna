@@ -15,8 +15,8 @@ class UserInfoChartData {
     return UserInfoChartData(
       categoryName: json['category'],
       categoryId: json['id'],
-      percentage: json['percentage'],
-      value: json['qtyCo2']
+      percentage: double.parse(json['percentage'].toString()),
+      value: double.parse(json['qtyCo2'].toString())
     );
   }
 }
