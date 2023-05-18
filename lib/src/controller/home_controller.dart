@@ -38,7 +38,7 @@ class HomeController {
         return MapEntry(index, value);
       }).values.toList(growable: false),
       userChartData: sections,
-      co2: json['qtyCo2'],
+      co2: double.parse(json['qtyCo2'].toString()),
       //suggestion: json['suggestion']
     );
   }
