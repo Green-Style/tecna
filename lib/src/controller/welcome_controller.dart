@@ -16,7 +16,7 @@ class WelcomeController {
     String testData = '''
     [{
       "id": "1",
-      "description": "1. 70.8% da superfície da Terra é coberta por água, sendo que 2,2% é água doce. Para consumo, o que temos disponível é apenas 0.3%",
+      "description": "70.8% da superfície da Terra é coberta por água, sendo que 2,2% é água doce. Para consumo, o que temos disponível é apenas 0.3%",
       "categoryId": 1
     },
     {

@@ -3,7 +3,7 @@ import 'package:green_style/src/model/general_info.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:green_style/src/controller/welcome_controller.dart';
 
-class GeneralInfoList extends StatelessWidget{
+class GeneralInfoList extends StatelessWidget {
   final welcomeCtrl = WelcomeController();
 
   Future<List<GeneralInfo>> _getInfo() async {
@@ -11,7 +11,7 @@ class GeneralInfoList extends StatelessWidget{
 
     return data;
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -30,23 +30,19 @@ class GeneralInfoList extends StatelessWidget{
                 skip: const Text('Pular'), // TODO: Add theme style
                 next: const Icon(Icons.arrow_forward_rounded),
                 dotsDecorator: DotsDecorator(
-                  activeColor: Theme.of(context).primaryColor,
-                  activeSize: const Size(22, 10),
-                  activeShape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(24)
-                  )
-                ),
+                    activeColor: Theme.of(context).primaryColor,
+                    activeSize: const Size(22, 10),
+                    activeShape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(24))),
                 // TODO: Make 'done'  a button
-                done: const Text( // TODO: Add theme style
+                done: const Text(
+                  // TODO: Add theme style
                   'Vamos lá',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 onDone: () {
-                  
                   // TODO: Remove comments when login page is complete
-                  Navigator.of(context).pushReplacementNamed(
-                    '/resetPassword'
-                  );
+                  Navigator.of(context).pushReplacementNamed('/login');
                 },
               );
             }
@@ -56,16 +52,17 @@ class GeneralInfoList extends StatelessWidget{
   }
 
   List<PageViewModel> createWelcomePages(List<GeneralInfo> generalInfo) {
-    return generalInfo.map((element) => PageViewModel( // TODO: Add theme style
-      title: '',
-      body: element.description,
-      image: buildImage(element.categoryId),
-      decoration: const PageDecoration(
-        bodyAlignment: Alignment.center,
-        bodyTextStyle: TextStyle(fontSize: 25),
-        imagePadding: EdgeInsets.all(40)
-      )
-    )).toList();
+    return generalInfo
+        .map((element) => PageViewModel(
+            // TODO: Add theme style
+            title: '',
+            body: element.description,
+            image: buildImage(element.categoryId),
+            decoration: const PageDecoration(
+                bodyAlignment: Alignment.center,
+                bodyTextStyle: TextStyle(fontSize: 25),
+                imagePadding: EdgeInsets.all(40))))
+        .toList();
   }
 
   Widget buildImage(int categoryId) {
@@ -92,10 +89,8 @@ class GeneralInfoList extends StatelessWidget{
         break;
     }
 
-    return Center( // TODO: Create proper widget selection according to category
-      child: Image.asset(
-        assetFile,
-        width: 350)
-    );
+    return Center(
+        // TODO: Create proper widget selection according to category
+        child: Image.asset(assetFile, width: 350));
   }
 }
