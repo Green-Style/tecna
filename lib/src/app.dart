@@ -21,6 +21,7 @@ class _MyAppState extends State<MyApp> {
       home: const WelcomeScreen(),
       // TODO: Criar rotas após terminar telas
       routes: {
+        '/home': (context) => HomePage(),
         '/login': (context) => LoginScreen(),
         '/resetPassword': (context) => ResetPasswordPage(),
         //   '/register': (context) => RegisterPage(),
