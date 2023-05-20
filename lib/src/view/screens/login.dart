@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       decoration: BoxDecoration(
                         color: Colors.grey[200],
                         border: Border.all(color: Colors.white),
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(22.5),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.only(left: 20.0),
