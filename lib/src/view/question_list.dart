@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:green_style/src/model/general_info.dart';
+import 'package:green_style/src/constants.dart';
+import 'package:green_style/src/model/question.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:green_style/src/controller/welcome_controller.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:green_style/src/controller/question_controller.dart';
 
-class GeneralInfoList extends StatelessWidget{
-  GeneralInfoList({super.key});
-  final welcomeCtrl = WelcomeController();
+class QuestionList extends StatelessWidget {
+  final welcomeCtrl = QuestionController();
 
-  Future<List<GeneralInfo>> _getInfo() async {
-    final data = await welcomeCtrl.getInfo();
+  Future<String?> getUserToken() async {
+    const storage = FlutterSecureStorage();
+    return await storage.read(key: userTokenKey);
+  }
+
+  Future<List<Question>> _getInfo() async {
+    final data = await welcomeCtrl.getForm(await getUserToken());
 
     return data;
   }
@@ -20,7 +26,7 @@ class GeneralInfoList extends StatelessWidget{
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
-            return const Center(child: CircularProgressIndicator());
+            return Center(child: const CircularProgressIndicator());
           default:
             if (snapshot.hasError) {
               return Text("Error: ${snapshot.error}");
@@ -42,6 +48,7 @@ class GeneralInfoList extends StatelessWidget{
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 onDone: () {
+                  // TODO: Remove comments when login page is complete
                   Navigator.of(context).pushReplacementNamed('/login');
                 },
               );
@@ -51,13 +58,13 @@ class GeneralInfoList extends StatelessWidget{
     );
   }
 
-  List<PageViewModel> createWelcomePages(List<GeneralInfo> generalInfo) {
+  List<PageViewModel> createWelcomePages(List<Question> generalInfo) {
     return generalInfo
         .map((element) => PageViewModel(
             // TODO: Add theme style
             title: '',
             body: element.description,
-            image: buildImage(element.categoryId),
+            image: buildImage(element.id),
             decoration: const PageDecoration(
                 bodyAlignment: Alignment.center,
                 bodyTextStyle: TextStyle(fontSize: 25),
