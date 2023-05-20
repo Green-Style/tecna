@@ -12,7 +12,7 @@ class HomeController {
     // TODO> Remove later
     String bearerToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgzMDI1MjIyLCJleHAiOjE2ODU2MTcyMjJ9.puruzhJDJFPaWW_JXpKNa9AePXfZPHgu2ePkL0fsQa4';
     Map<String,String> infoHeaders = {
-      'Authorization': 'Bearer ${bearerToken}'
+      'Authorization': 'Bearer $bearerToken'
     };
     var url = Uri.http(apiUrl, '/api/report/my-co-two');
     final response = await http.get(url, headers: infoHeaders);
@@ -30,7 +30,7 @@ class HomeController {
           color: selectColorByCategory(data.categoryId),
           value: data.percentage,
           title: '${data.percentage}%',
-          titleStyle: TextStyle(
+          titleStyle: const TextStyle(
             color: Colors.white
           ),
           radius: 50,
@@ -39,7 +39,7 @@ class HomeController {
       }).values.toList(growable: false),
       userChartData: sections,
       co2: double.parse(json['qtyCo2'].toString()),
-      //suggestion: json['suggestion']
+      suggestion: json['suggestion']
     );
   }
 
