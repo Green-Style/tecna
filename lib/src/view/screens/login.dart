@@ -21,7 +21,6 @@ class _LoginScreenState extends State<LoginScreen> {
           child: SafeArea(
             child: Center(
               child: Column(
-                //mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
                     'assets/icons/green_style_white_small.png',
@@ -120,11 +119,18 @@ class _LoginScreenState extends State<LoginScreen> {
                         'Ainda não é cadastrado?',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      Text(
-                        ' Cadastre-se',
-                        style: TextStyle(
-                            color: Colors.blue, fontWeight: FontWeight.bold),
-                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pushNamed('/register');
+                        },
+                        child: Text(
+                          ' Cadastre-se',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      )
                     ],
                   )
                 ],
