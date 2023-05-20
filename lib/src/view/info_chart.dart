@@ -61,7 +61,7 @@ class InfoChart extends StatelessWidget {
                             padding: const EdgeInsets.all(8.0),
                             child: Center(
                               child: Text( // TODO: Alterar para sugestão buscada da API
-                                'Alguma coisa',
+                                snapshot.data!.suggestion,
                                 style: TextStyle(
                                   color: Colors.white
                                 ),
