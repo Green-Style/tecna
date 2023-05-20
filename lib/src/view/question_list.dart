@@ -26,31 +26,13 @@ class QuestionList extends StatelessWidget {
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
-            return Center(child: const CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           default:
             if (snapshot.hasError) {
               return Text("Error: ${snapshot.error}");
             } else {
-              return IntroductionScreen(
-                pages: createWelcomePages(snapshot.data!),
-                showSkipButton: true,
-                skip: const Text('Pular'), // TODO: Add theme style
-                next: const Icon(Icons.arrow_forward_rounded),
-                dotsDecorator: DotsDecorator(
-                    activeColor: Theme.of(context).primaryColor,
-                    activeSize: const Size(22, 10),
-                    activeShape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(24))),
-                // TODO: Make 'done'  a button
-                done: const Text(
-                  // TODO: Add theme style
-                  'Vamos lá',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                onDone: () {
-                  // TODO: Remove comments when login page is complete
-                  Navigator.of(context).pushReplacementNamed('/login');
-                },
+              return Center(
+                child: Text('Tela de questionário'),
               );
             }
         }
@@ -58,19 +40,7 @@ class QuestionList extends StatelessWidget {
     );
   }
 
-  List<PageViewModel> createWelcomePages(List<Question> generalInfo) {
-    return generalInfo
-        .map((element) => PageViewModel(
-            // TODO: Add theme style
-            title: '',
-            body: element.description,
-            image: buildImage(element.id),
-            decoration: const PageDecoration(
-                bodyAlignment: Alignment.center,
-                bodyTextStyle: TextStyle(fontSize: 25),
-                imagePadding: EdgeInsets.all(40))))
-        .toList();
-  }
+
 
   Widget buildImage(int categoryId) {
     String assetFile = '';
