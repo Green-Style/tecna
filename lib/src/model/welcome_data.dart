@@ -11,8 +11,8 @@ class WelcomeData {
 
   factory WelcomeData.fromJson(Map<String, dynamic> json) {
     return WelcomeData(
-      info: json['info'] ?? [GeneralInfo(id: '', description: '')],
-      token: json['token'] ?? ''
+      info: json['info'],
+      token: json['token']
     );
   }
 }
