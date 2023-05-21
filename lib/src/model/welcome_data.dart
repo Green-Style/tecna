@@ -2,7 +2,7 @@ import 'package:green_style/src/model/general_info.dart';
 
 class WelcomeData {
   List<GeneralInfo> info;
-  String token;
+  String? token;
 
   WelcomeData({
     required this.info,
