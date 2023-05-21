@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:green_style/src/constants.dart';
 import 'package:green_style/src/controller/register_controller.dart';
@@ -16,8 +14,6 @@ class RegistrationScreen extends StatefulWidget {
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
   final _formKey = GlobalKey<FormState>();
-  String _email = '';
-  String _password = '';
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +42,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       child: TextField(
                         controller: _nameController,
                         keyboardType: TextInputType.name,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Nome',
                         ),
@@ -54,7 +50,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 //textfield Email
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -69,7 +65,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       child: TextField(
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Email',
                         ),
@@ -77,7 +73,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
 
                 //textfield Password
                 Padding(
@@ -93,7 +89,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       child: TextField(
                         controller: _passwordController,
                         obscureText: true,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Senha',
                         ),
@@ -101,7 +97,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
 
                 //textfield Confirm Password
                 Padding(
@@ -117,7 +113,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       child: TextField(
                         controller: _confirmPasswordController,
                         obscureText: true,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Confirme a Senha',
                         ),
@@ -125,7 +121,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
 
                 //button Register
                 Padding(
@@ -146,7 +142,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       ),
                       elevation: MaterialStateProperty.all(100),
                     ),
-                    child: Center(
+                    child: const Center(
                         child: Text(
                       'Registrar',
                       style: TextStyle(
@@ -175,14 +171,14 @@ Future<void> _registerBtnAction(BuildContext context) async {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              title: Text('Erro'),
-              content: Text('Verifique seus dados e tente novamente!'),
+              title: const Text('Erro'),
+              content: const Text('Verifique seus dados e tente novamente!'),
               actions: [
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('OK'),
+                  child: const Text('OK'),
                 )
               ],
             ));
@@ -192,15 +188,15 @@ Future<void> _registerBtnAction(BuildContext context) async {
   showDialog(
       context: context,
       builder: (context) => AlertDialog(
-            title: Text('Parabéns!'),
-            content:
-                Text('Seu registro foi efetuado, por favor confirme o e-mail.'),
+            title: const Text('Parabéns!'),
+            content: const Text(
+                'Seu registro foi efetuado, por favor confirme o e-mail.'),
             actions: [
               TextButton(
                   onPressed: () {
                     Navigator.of(context).pushNamed('/login');
                   },
-                  child: Text('Ir para Login'))
+                  child: const Text('Ir para Login'))
             ],
           )).then((value) => Navigator.of(context).pushNamed('/login'));
 }
@@ -219,14 +215,14 @@ bool _validateInputs(BuildContext context) {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              title: Text('Erro'),
-              content: Text('Por favor, preencha todos os campos.'),
+              title: const Text('Erro'),
+              content: const Text('Por favor, preencha todos os campos.'),
               actions: [
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('OK'),
+                  child: const Text('OK'),
                 )
               ],
             ));
@@ -237,14 +233,14 @@ bool _validateInputs(BuildContext context) {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              title: Text('Erro'),
-              content: Text('Por favor, digite um e-mail válido.'),
+              title: const Text('Erro'),
+              content: const Text('Por favor, digite um e-mail válido.'),
               actions: [
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('OK'),
+                  child: const Text('OK'),
                 )
               ],
             ));
@@ -255,14 +251,14 @@ bool _validateInputs(BuildContext context) {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              title: Text('Erro'),
-              content: Text('As senhas não correspondem'),
+              title: const Text('Erro'),
+              content: const Text('As senhas não correspondem'),
               actions: [
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('OK'),
+                  child: const Text('OK'),
                 )
               ],
             ));
@@ -281,8 +277,7 @@ Future<void> _submitRegister(BuildContext context) async {
 }
 
 bool validateEmail(String email) {
-  final String emailRegex =
-      r'^[\w-]+(\.[\w-]+)*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,7}$';
+  final String emailRegex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
 
   final RegExp regex = RegExp(emailRegex);
 

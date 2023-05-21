@@ -2,6 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:green_style/src/constants.dart';
+import 'package:green_style/src/controller/login_controller.dart';
+
+TextEditingController _emailController = TextEditingController();
+TextEditingController _passwordController = TextEditingController();
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -10,8 +14,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  String _email = '';
-  String _password = '';
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 20.0),
                         child: TextField(
+                          controller: _emailController,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -72,11 +75,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       decoration: BoxDecoration(
                         color: Colors.grey[200],
                         border: Border.all(color: Colors.white),
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(22.5),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.only(left: 20.0),
                         child: TextField(
+                          controller: _passwordController,
                           obscureText: true,
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -91,23 +95,31 @@ class _LoginScreenState extends State<LoginScreen> {
                   //botao de login
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                    child: Container(
-                      padding: EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: buttonBackgroundColor,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Center(
-                        child: Text(
+                    child: ElevatedButton(
+                        onPressed: () {
+                          _submitLogin(context);
+                        },
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(buttonBackgroundColor),
+                          foregroundColor: MaterialStateProperty.all(
+                              activebuttonBackgroundColor),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(22.5),
+                            ),
+                          ),
+                          elevation: MaterialStateProperty.all(100),
+                        ),
+                        child: const Center(
+                            child: Text(
                           'Login',
                           style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ),
-                    ),
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                        ))),
                   ),
                   SizedBox(height: 10),
 
@@ -138,5 +150,37 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ));
+  }
+
+  Future<void> _submitLogin(BuildContext context) async {
+    final loginCtl = LoginController();
+    String password = _passwordController.text;
+    String email = _emailController.text;
+
+    try {
+      await loginCtl.signIn(email, password);
+    } catch (_) {
+      _showErrorDialog('Falha na autenticação do usuário');
+    }
+  }
+
+  void _showErrorDialog(String errorMessage) {
+    showDialog(
+      context: _LoginScreenState().context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Erro no Login'),
+          content: Text(errorMessage),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
