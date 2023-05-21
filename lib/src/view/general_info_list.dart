@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:green_style/src/constants.dart';
 import 'package:green_style/src/model/general_info.dart';
+import 'package:green_style/src/model/welcome_data.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:green_style/src/controller/welcome_controller.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class GeneralInfoList extends StatelessWidget{
   GeneralInfoList({super.key});
   final welcomeCtrl = WelcomeController();
 
-  Future<List<GeneralInfo>> _getInfo() async {
-    final data = await welcomeCtrl.getInfo();
+  Future<String?> getUserToken() async {
+    const storage = FlutterSecureStorage();
+    return await storage.read(key: userTokenKey);
+  }
+
+  Future<WelcomeData> _getInfo() async {
+    WelcomeData data = WelcomeData(info: await welcomeCtrl.getInfo(), token: await getUserToken());
 
     return data;
   }
@@ -26,7 +34,7 @@ class GeneralInfoList extends StatelessWidget{
               return Text("Error: ${snapshot.error}");
             } else {
               return IntroductionScreen(
-                pages: createWelcomePages(snapshot.data!),
+                pages: createWelcomePages(snapshot.data!.info),
                 showSkipButton: true,
                 skip: const Text('Pular'), // TODO: Add theme style
                 next: const Icon(Icons.arrow_forward_rounded),
@@ -42,7 +50,7 @@ class GeneralInfoList extends StatelessWidget{
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 onDone: () {
-                  Navigator.of(context).pushReplacementNamed('/login');
+                  snapshot.data!.token != null ? Navigator.of(context).pushReplacementNamed('/home') : Navigator.of(context).pushReplacementNamed('/login');
                 },
               );
             }
