@@ -7,7 +7,9 @@ class QuestionnaireScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: QuestionList(),
+      child: Scaffold(
+        body: QuestionList(),
+      ),
     );
   }
 }
