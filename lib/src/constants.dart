@@ -51,6 +51,8 @@ class _GreenStyleBottomNavigationBarState extends State<GreenStyleBottomNavigati
       ],
       selectedItemColor: buttonBackgroundColor,
       unselectedItemColor: Colors.grey,
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
       onTap: (index) {
         setState(() {
           _currentIndex = index;

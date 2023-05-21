@@ -1,18 +1,15 @@
 class GeneralInfo {
-  String id;
   String description;
   int categoryId;
 
   GeneralInfo({
-    required this.id,
     required this.description,
-    this.categoryId = 0,
+    required this.categoryId,
   });
 
   factory GeneralInfo.fromJson(Map<String, dynamic> json) {
     return GeneralInfo(
-      id: json['id'],
-      categoryId: json['categoryId'],
+      categoryId: json['category_id'],
       description: json['description'],
     );
   }
