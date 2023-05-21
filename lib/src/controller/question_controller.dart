@@ -27,7 +27,8 @@ class QuestionController {
     // TODO: Change later
     String bearerToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgzMDI1MjIyLCJleHAiOjE2ODU2MTcyMjJ9.puruzhJDJFPaWW_JXpKNa9AePXfZPHgu2ePkL0fsQa4';
     Map<String,String> tokenHeaders = {
-      'Authorization': 'Bearer $bearerToken'
+      'Authorization': 'Bearer $bearerToken',
+      'Content-Type': 'application/json'
     };
 
     String answerJson = jsonEncode(answers);
