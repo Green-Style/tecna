@@ -1,3 +1,4 @@
+import 'package:green_style/src/view/screens/forgot_password.dart';
 import 'package:green_style/src/view/screens/login.dart';
 import 'package:green_style/src/view/screens/home.dart';
 import 'package:green_style/src/view/screens/questionnaire.dart';
@@ -28,6 +29,7 @@ class _MyAppState extends State<MyApp> {
         '/resetPassword': (context) => ResetPasswordPage(),
         '/register': (context) => RegistrationScreen(),
         '/quiz': (context) => QuestionnaireScreen(),
+        '/forgotPassword': (context) => ForgotPasswordScreen(),
         //   '/compare': (context) => ComparisonScreen(),
         //   '/account': (context) => AccountScreen(),
       },
