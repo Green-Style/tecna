@@ -181,14 +181,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
     try {
       await loginCtl.signIn(email, password);
+      Navigator.of(context).pushNamed('/home');
     } catch (_) {
-      _showErrorDialog('Falha na autenticação do usuário');
+      _showErrorDialog('Verifique seus dados.');
     }
   }
 
   void _showErrorDialog(String errorMessage) {
     showDialog(
-      context: _LoginScreenState().context,
+      context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Erro no Login'),
