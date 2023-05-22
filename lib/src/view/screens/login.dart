@@ -144,7 +144,29 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       )
                     ],
+                  ),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pushNamed('/forgotPassword');
+                        },
+                        child: Text(
+                          'Esqueci minha senha',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      )
+                    ],
                   )
+                
                 ],
               ),
             ),
