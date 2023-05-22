@@ -17,7 +17,6 @@ class GeneralInfoList extends StatelessWidget{
 
   Future<WelcomeData> _getInfo() async {
     WelcomeData data = WelcomeData(info: await welcomeCtrl.getInfo(), token: await getUserToken());
-
     return data;
   }
 
@@ -50,7 +49,7 @@ class GeneralInfoList extends StatelessWidget{
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 onDone: () {
-                  snapshot.data!.token != null ? Navigator.of(context).pushReplacementNamed('/home') : Navigator.of(context).pushReplacementNamed('/login');
+                  snapshot.data!.token != null ? Navigator.of(context).pushReplacementNamed('/prehome') : Navigator.of(context).pushReplacementNamed('/login');
                 },
               );
             }
