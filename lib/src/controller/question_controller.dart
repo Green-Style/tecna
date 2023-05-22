@@ -5,10 +5,8 @@ import 'package:green_style/src/model/question.dart';
 
 class QuestionController {
   Future<List<Question>> getForm(String? userToken) async {
-    // TODO: Change later
-    String bearerToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgzMDI1MjIyLCJleHAiOjE2ODU2MTcyMjJ9.puruzhJDJFPaWW_JXpKNa9AePXfZPHgu2ePkL0fsQa4';
     Map<String,String> tokenHeaders = {
-      'Authorization': 'Bearer $bearerToken'
+      'Authorization': 'Bearer $userToken'
     };
 
     var url = Uri.http(apiUrl, '/api/random-form');
@@ -24,10 +22,8 @@ class QuestionController {
   }
 
   Future<bool> saveForm(String? userToken, List<Map> answers) async {
-    // TODO: Change later
-    String bearerToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgzMDI1MjIyLCJleHAiOjE2ODU2MTcyMjJ9.puruzhJDJFPaWW_JXpKNa9AePXfZPHgu2ePkL0fsQa4';
     Map<String,String> tokenHeaders = {
-      'Authorization': 'Bearer $bearerToken',
+      'Authorization': 'Bearer $userToken',
       'Content-Type': 'application/json'
     };
 
