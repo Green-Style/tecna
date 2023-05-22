@@ -194,11 +194,15 @@ Future<void> _registerBtnAction(BuildContext context) async {
             actions: [
               TextButton(
                   onPressed: () {
+                    _clearInputs();
                     Navigator.of(context).pushNamed('/login');
                   },
                   child: const Text('Ir para Login'))
             ],
-          )).then((value) => Navigator.of(context).pushNamed('/login'));
+          )).then((value){
+          _clearInputs(); 
+          Navigator.of(context).pushNamed('/login');
+          });
 }
 
 bool _validateInputs(BuildContext context) {
@@ -282,4 +286,11 @@ bool validateEmail(String email) {
   final RegExp regex = RegExp(emailRegex);
 
   return regex.hasMatch(email);
+}
+
+void _clearInputs(){
+  _passwordController.clear();
+  _confirmPasswordController.clear();
+  _emailController.clear();
+  _nameController.clear();
 }
