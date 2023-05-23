@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:green_style/src/constants.dart';
 import 'package:green_style/src/controller/home_controller.dart';
-import 'package:green_style/src/model/home_data.dart';
 
 class ComparisonChart extends StatelessWidget {
   ComparisonChart({super.key});
@@ -14,8 +13,8 @@ class ComparisonChart extends StatelessWidget {
     return await storage.read(key: userTokenKey);
   }
 
-  Future<HomeData> _getUserInfoChartData() async {
-    final data = await homeCtrl.getUserInfoChartData(await getUserToken());
+  Future<BarChartData> _getComparisonChartData() async {
+    final data = await homeCtrl.getComparisonChartData(await getUserToken());
 
     return data;
   }
@@ -23,7 +22,7 @@ class ComparisonChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _getUserInfoChartData(),
+      future: _getComparisonChartData(),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
@@ -43,7 +42,7 @@ class ComparisonChart extends StatelessWidget {
                     children: [
                       Center(
                         child: Text( // TODO: Alterar para sugestão buscada da API
-                          snapshot.data!.suggestion,
+                          'algo',
                           style: TextStyle(
                             color: Colors.white
                           ),
@@ -64,13 +63,8 @@ class ComparisonChart extends StatelessWidget {
                           height: 250,
                           width: double.infinity,
                           child: Center(
-                            child: PieChart(
-                              PieChartData(
-                                sectionsSpace: 2,
-                                centerSpaceRadius: 60,
-                                borderData: FlBorderData(show: false),
-                                sections: snapshot.data!.sections,
-                              ),
+                            child: BarChart(
+                              snapshot.data!
                             ),
                           ),
                         ),

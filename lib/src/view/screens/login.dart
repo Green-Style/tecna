@@ -181,7 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     try {
       await loginCtl.signIn(email, password);
-      Navigator.of(context).pushNamed('/prehome');
+      Navigator.of(context).pushReplacementNamed('/prehome');
     } catch (_) {
       _showErrorDialog('Verifique seus dados.');
     }
