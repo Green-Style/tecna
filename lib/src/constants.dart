@@ -67,7 +67,7 @@ class _GreenStyleBottomNavigationBarState extends State<GreenStyleBottomNavigati
         switch (index) {
           case 0:
             Navigator.of(context).pushReplacementNamed(
-              '/'
+              '/home'
             );
             break;
           case 1:
