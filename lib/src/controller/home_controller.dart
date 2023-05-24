@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:green_style/src/model/comparison.dart';
 import 'package:http/http.dart' as http;
 import 'package:fl_chart/fl_chart.dart';
 import 'package:green_style/src/constants.dart';
@@ -54,7 +55,7 @@ class HomeController {
     return json['answeredLeastOneForm'];
   }
 
-  Future<BarChartData> getComparisonChartData(String? userToken) async {
+  Future<Comparison> getComparisonChartData(String? userToken) async {
     Map<String,String> infoHeaders = {
       'Authorization': 'Bearer $userToken'
     };
@@ -62,109 +63,9 @@ class HomeController {
     final response = await http.get(url, headers: infoHeaders);
     dynamic json = jsonDecode(response.body);
 
-    return BarChartData(
-      barGroups: [
-        BarChartGroupData(
-          x: 0,
-          barRods: [
-            BarChartRodData(
-              toY: json['firstQtyCo2'],
-              color: Colors.amber
-            )
-          ],
-          showingTooltipIndicators: [0],
-        ),
-        BarChartGroupData(
-          x: 1,
-          barRods: [
-            BarChartRodData(
-              toY: json['lastQtyCo2'],
-              color: Colors.blue
-            )
-          ],
-          showingTooltipIndicators: [0],
-        ),
-        BarChartGroupData(
-          x: 2,
-          barRods: [
-            BarChartRodData(
-              toY: json['globalQtyCo2'],
-              color: Colors.orange
-            )
-          ],
-          showingTooltipIndicators: [0],
-        ),
-      ],
-      barTouchData: BarTouchData(
-        enabled: false,
-        touchTooltipData: BarTouchTooltipData(
-          tooltipBgColor: Colors.transparent,
-          tooltipPadding: EdgeInsets.zero,
-          tooltipMargin: 8,
-          getTooltipItem: (
-            BarChartGroupData group,
-            int groupIndex,
-            BarChartRodData rod,
-            int rodIndex,
-          ) {
-            return BarTooltipItem(
-              rod.toY.round().toString(),
-              const TextStyle(
-                color: Colors.cyan,
-                fontWeight: FontWeight.bold,
-              ),
-            );
-          },
-        ),
-      ),
-      titlesData: FlTitlesData(
-        show: true,
-        bottomTitles: AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: true,
-            reservedSize: 30,
-            getTitlesWidget: (value, meta) {
-              String text;
-
-              switch(value.toInt()) {
-                case 0:
-                  text = 'Inicial';
-                  break;
-                case 1:
-                  text = 'Atual';
-                  break;
-                case 2:
-                  text = 'Global';
-                  break;
-                default:
-                  text = '';
-                  break;
-              }
-
-              return SideTitleWidget(
-                axisSide: meta.axisSide,
-                space: 4,
-                child: Text(text),
-              );
-            },
-          ),
-        ),
-        leftTitles: AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
-        ),
-        topTitles: AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
-        ),
-        rightTitles: AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
-        ),
-      ),
-      borderData: FlBorderData(
-        show: false,
-      ),
-      gridData: FlGridData(show: false),
-      alignment: BarChartAlignment.spaceAround,
-      maxY: 20,
+    return Comparison(
+      dataList: [],
+      labels: [],
     );
   }
 
