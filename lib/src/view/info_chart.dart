@@ -34,7 +34,7 @@ class InfoChart extends StatelessWidget {
             } else {
               return SingleChildScrollView(
                 child: DecoratedBox(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: darkBackgroundColor,
                   ),
                   child: Column(
@@ -60,65 +60,71 @@ class InfoChart extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Center(
-                              child: Text( // TODO: Alterar para sugestão buscada da API
+                              child: Text(
                                 snapshot.data!.suggestion,
-                                style: TextStyle(
-                                  color: Colors.white
-                                ),
+                                style: const TextStyle(color: Colors.white),
                               ),
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      DecoratedBox( // Legendas
+                      DecoratedBox(
+                        // Legendas
                         decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: const BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0)),
-                          border: Border.all(
-                            style: BorderStyle.none
-                          )
-                        ),
+                            color: Colors.white,
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(20.0),
+                                topRight: Radius.circular(20.0)),
+                            border: Border.all(style: BorderStyle.none)),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
+                            const SizedBox(
+                              height: 275,
+                            ),
                             Padding(
                               padding: const EdgeInsets.all(16),
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: snapshot.data!.userChartData.map(
-                                  (e) => Container(
-                                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                            width: 16,
-                                            height: 16,
-                                            margin: const EdgeInsetsDirectional.only(end: 6),
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: homeCtrl.selectColorByCategory(e.categoryId)
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: snapshot.data!.userChartData
+                                      .map((e) => Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 15, horizontal: 5),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(1.0),
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    width: 16,
+                                                    height: 16,
+                                                    margin:
+                                                        const EdgeInsetsDirectional
+                                                            .only(end: 6),
+                                                    decoration: BoxDecoration(
+                                                        shape:
+                                                            BoxShape.rectangle,
+                                                        color: homeCtrl
+                                                            .selectColorByCategory(
+                                                                e.categoryId)),
+                                                  ),
+                                                  const SizedBox(width: 2),
+                                                  Text(
+                                                    "${e.categoryName} - ${e.value.toString().replaceAll('.', ',')} Kg",
+                                                    style: const TextStyle(
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: Colors.black),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                          const SizedBox(width: 2),
-                                          Text(
-                                            "${homeCtrl.selectCategoryTitle(e.categoryId)} - ${e.value} ton",
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.black
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  )
-                                ).toList()
-                              ),
+                                          ))
+                                      .toList()),
                             )
                           ],
                         ),

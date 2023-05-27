@@ -89,14 +89,14 @@ class GeneralInfoList extends StatelessWidget {
                   element.description,
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 20),
               ],
             ),
             decoration: const PageDecoration(
                 imageAlignment: Alignment.centerLeft,
                 bodyAlignment: Alignment.bottomCenter,
                 bodyTextStyle: TextStyle(fontSize: 10),
-                imagePadding: EdgeInsets.all(40))))
+                imagePadding: EdgeInsets.all(0))))
         .toList();
   }
 
