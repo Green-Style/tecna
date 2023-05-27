@@ -52,62 +52,95 @@ class PieChart2State extends State {
                     children: [
                       Column(
                         children: [
-                          SizedBox(
-                            height: 250,
-                            width: double.infinity,
-                            child: Center(
-                              child: AspectRatio(
-                                aspectRatio: 1.3,
-                                child: Column(
-                                  children: <Widget>[
-                                    const SizedBox(
-                                      height: 18,
+                          Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  Center(
+                                    child: Text(
+                                      "${snapshot.data!.co2.toStringAsFixed(2).replaceAll('.', ',')}\nKg",
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          shadows: [
+                                            Shadow(
+                                                color: Colors.black,
+                                                blurRadius: 7)
+                                          ],
+                                          color: Colors.white,
+                                          fontSize: 30),
+                                      textAlign: TextAlign.center,
                                     ),
-                                    Expanded(
-                                      child: AspectRatio(
-                                        aspectRatio: 1,
-                                        child: PieChart(
-                                          PieChartData(
-                                            pieTouchData: PieTouchData(
-                                              touchCallback:
-                                                  (FlTouchEvent event,
-                                                      pieTouchResponse) {
-                                                setState(() {
-                                                  if (!event
-                                                          .isInterestedForInteractions ||
-                                                      pieTouchResponse ==
-                                                          null ||
-                                                      pieTouchResponse
-                                                              .touchedSection ==
-                                                          null) {
-                                                    touchedIndex = -1;
-                                                    return;
-                                                  }
-                                                  touchedIndex =
-                                                      pieTouchResponse
-                                                          .touchedSection!
-                                                          .touchedSectionIndex;
-                                                });
-                                              },
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 250,
+                                width: double.infinity,
+                                child: Center(
+                                  child: AspectRatio(
+                                    aspectRatio: 1.3,
+                                    child: Column(
+                                      children: <Widget>[
+                                        const SizedBox(
+                                          height: 18,
+                                        ),
+                                        Expanded(
+                                          child: AspectRatio(
+                                            aspectRatio: 1,
+                                            child: PieChart(
+                                              PieChartData(
+                                                pieTouchData: PieTouchData(
+                                                  touchCallback:
+                                                      (FlTouchEvent event,
+                                                          pieTouchResponse) {
+                                                    setState(() {
+                                                      if (pieTouchResponse ==
+                                                              null ||
+                                                          pieTouchResponse
+                                                                  .touchedSection ==
+                                                              null) {
+                                                        return;
+                                                      }
+
+                                                      if (touchedIndex >= 0) {
+                                                        touchedIndex = -1;
+                                                        return;
+                                                      }
+
+                                                      touchedIndex =
+                                                          pieTouchResponse
+                                                              .touchedSection!
+                                                              .touchedSectionIndex;
+
+                                                      return;
+                                                    });
+                                                  },
+                                                ),
+                                                borderData: FlBorderData(
+                                                  show: true,
+                                                ),
+                                                sectionsSpace: 0,
+                                                centerSpaceRadius: 70,
+                                                sections: showingSections(
+                                                    snapshot
+                                                        .data!.userChartData),
+                                              ),
                                             ),
-                                            borderData: FlBorderData(
-                                              show: false,
-                                            ),
-                                            sectionsSpace: 0,
-                                            centerSpaceRadius: 70,
-                                            sections: showingSections(
-                                                snapshot.data!.userChartData),
                                           ),
                                         ),
-                                      ),
+                                        const SizedBox(
+                                          width: 35,
+                                        ),
+                                      ],
                                     ),
-                                    const SizedBox(
-                                      width: 35,
-                                    ),
-                                  ],
+                                  ),
                                 ),
                               ),
-                            ),
+                            ],
                           ),
                           Container(
                             margin: const EdgeInsets.only(top: 25.0, bottom: 5),
@@ -143,41 +176,58 @@ class PieChart2State extends State {
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: snapshot.data!.userChartData
-                                      .map((e) => Container(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 15, horizontal: 5),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(1.0),
-                                              child: Row(
-                                                children: [
-                                                  Container(
-                                                    width: 16,
-                                                    height: 16,
-                                                    margin:
-                                                        const EdgeInsetsDirectional
-                                                            .only(end: 6),
-                                                    decoration: BoxDecoration(
-                                                        shape:
-                                                            BoxShape.rectangle,
-                                                        color: homeCtrl
-                                                            .selectColorByPercentage(
-                                                                e.percentage)),
-                                                  ),
-                                                  const SizedBox(width: 2),
-                                                  Text(
-                                                    "${e.categoryName} - ${e.value.toString().replaceAll('.', ',')} Kg",
-                                                    style: const TextStyle(
-                                                        fontSize: 18,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: Colors.black),
-                                                  ),
-                                                ],
+                                      .asMap()
+                                      .entries
+                                      .map((entry) {
+                                    int idx = entry.key;
+                                    UserInfoChartData data = entry.value;
+
+                                    final isTouched = idx == touchedIndex;
+
+                                    return Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15, horizontal: 5),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(1.0),
+                                        child: Row(
+                                          children: [
+                                            Container(
+                                              width: isTouched ? 30.0 : 20,
+                                              height: 20,
+                                              margin:
+                                                  const EdgeInsetsDirectional
+                                                      .only(end: 6),
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.rectangle,
+                                                  color: homeCtrl
+                                                      .selectColorByPercentage(
+                                                          data.percentage)),
+                                            ),
+                                            const SizedBox(width: 2),
+                                            GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  touchedIndex =
+                                                      touchedIndex == idx
+                                                          ? -1
+                                                          : idx;
+                                                });
+                                              },
+                                              child: Text(
+                                                "${data.categoryName} - ${data.value.toString().replaceAll('.', ',')} Kg",
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    fontWeight: isTouched
+                                                        ? FontWeight.bold
+                                                        : FontWeight.w400,
+                                                    color: Colors.black),
                                               ),
                                             ),
-                                          ))
-                                      .toList()),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  }).toList()),
                             )
                           ],
                         ),
@@ -201,7 +251,7 @@ class PieChart2State extends State {
       final isTouched = idx == touchedIndex;
       final fontSize = isTouched ? 25.0 : 16.0;
       final radius = isTouched ? 60.0 : 50.0;
-      const shadows = [Shadow(color: Colors.black, blurRadius: 2)];
+      const shadows = [Shadow(color: Colors.black, blurRadius: 7)];
       return PieChartSectionData(
           color: homeCtrl.selectColorByPercentage(data.percentage),
           value: data.percentage,
