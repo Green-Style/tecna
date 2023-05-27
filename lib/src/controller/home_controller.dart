@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:green_style/src/model/comparison.dart';
+import 'package:green_style/src/view/comparison_chart.dart';
 import 'package:http/http.dart' as http;
 import 'package:fl_chart/fl_chart.dart';
 import 'package:green_style/src/constants.dart';
@@ -63,9 +64,32 @@ class HomeController {
     final response = await http.get(url, headers: infoHeaders);
     dynamic json = jsonDecode(response.body);
 
+    List<BarData> dataList;
+    List<String> labels;
+
+    // TODO: Decidir como serao organizadas as barras/labels
+    // Forma 1: Atual - Inicial - Global
+    dataList = [
+      BarData(initialEmissionColor, json['firstQtyCo2']),
+      BarData(globalEmissionColor, json['globalQtyCo2'])
+    ];
+
+    labels = [
+      'Inicial',
+      'Global'
+    ];
+
+    if (json['lastQtyCo2'] != null) {
+      dataList.insert(0, BarData(actualEmissionColor, json['lastQtyCo2']));
+      labels.insert(0, 'Atual');
+    }
+
+    // Forma 2: Ordem decrescente
+    // TODO: Implementar caso necessario
+
     return Comparison(
-      dataList: [],
-      labels: [],
+      dataList: dataList,
+      labels: labels,
     );
   }
 
