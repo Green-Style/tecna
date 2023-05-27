@@ -26,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   Image.asset(
                     'assets/icons/green_style_white_small.png',
-                    width: 350,
+                    width: 250,
                   ),
                   Text(
                     'Seja Bem-Vindo!',
@@ -145,7 +145,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       )
                     ],
                   ),
-                Row(
+                  const SizedBox(height: 20),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
@@ -166,7 +167,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       )
                     ],
                   )
-                
                 ],
               ),
             ),

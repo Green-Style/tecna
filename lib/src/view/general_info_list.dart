@@ -6,7 +6,7 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'package:green_style/src/controller/welcome_controller.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-class GeneralInfoList extends StatelessWidget{
+class GeneralInfoList extends StatelessWidget {
   GeneralInfoList({super.key});
   final welcomeCtrl = WelcomeController();
 
@@ -16,7 +16,8 @@ class GeneralInfoList extends StatelessWidget{
   }
 
   Future<WelcomeData> _getInfo() async {
-    WelcomeData data = WelcomeData(info: await welcomeCtrl.getInfo(), token: await getUserToken());
+    WelcomeData data = WelcomeData(
+        info: await welcomeCtrl.getInfo(), token: await getUserToken());
     return data;
   }
 
@@ -35,10 +36,15 @@ class GeneralInfoList extends StatelessWidget{
               return IntroductionScreen(
                 pages: createWelcomePages(snapshot.data!.info),
                 showSkipButton: true,
-                skip: const Text('Pular'), // TODO: Add theme style
+                skip: const Text(
+                  'Pular',
+                  style: TextStyle(
+                    color: Color.fromRGBO(47, 175, 239, 1),
+                  ),
+                ), // TODO: Add theme style
                 next: const Icon(Icons.arrow_forward_rounded),
                 dotsDecorator: DotsDecorator(
-                    activeColor: Theme.of(context).primaryColor,
+                    activeColor: const Color.fromRGBO(47, 175, 239, 1),
                     activeSize: const Size(22, 10),
                     activeShape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(24))),
@@ -46,10 +52,15 @@ class GeneralInfoList extends StatelessWidget{
                 done: const Text(
                   // TODO: Add theme style
                   'Vamos lá',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromRGBO(47, 175, 239, 1),
+                  ),
                 ),
                 onDone: () {
-                  snapshot.data!.token != null ? Navigator.of(context).pushReplacementNamed('/prehome') : Navigator.of(context).pushReplacementNamed('/login');
+                  snapshot.data!.token != null
+                      ? Navigator.of(context).pushReplacementNamed('/prehome')
+                      : Navigator.of(context).pushReplacementNamed('/login');
                 },
               );
             }
@@ -63,41 +74,51 @@ class GeneralInfoList extends StatelessWidget{
         .map((element) => PageViewModel(
             // TODO: Add theme style
             title: '',
-            body: element.description,
-            image: buildImage(element.categoryId),
+            // body: element.description,
+            bodyWidget: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/icons/green_style_white_small.png',
+                  width: 250,
+                  alignment: Alignment.topCenter,
+                ),
+                buildImage(element.categoryId),
+                const SizedBox(height: 20),
+                Text(
+                  element.description,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 10),
+              ],
+            ),
             decoration: const PageDecoration(
-                bodyAlignment: Alignment.center,
-                bodyTextStyle: TextStyle(fontSize: 25),
+                imageAlignment: Alignment.centerLeft,
+                bodyAlignment: Alignment.bottomCenter,
+                bodyTextStyle: TextStyle(fontSize: 10),
                 imagePadding: EdgeInsets.all(40))))
         .toList();
   }
 
   Widget buildImage(int categoryId) {
-    String assetFile = '';
+    Image imageAsset =
+        Image.asset('assets/icons/carbon_footprint.png', width: 140);
 
     switch (categoryId) {
-      case 1: // TODO: Change image according to category
-        assetFile = 'assets/icons/green_style_white_small.png';
+      case 1:
+        imageAsset = Image.asset('assets/icons/car_icon.png', width: 250);
         break;
-      case 2: // TODO: Change image according to category
-        assetFile = 'assets/icons/green_style_white_small.png';
+      case 2:
+        imageAsset = Image.asset('assets/icons/food_icon.png', width: 130);
         break;
-      case 3: // TODO: Change image according to category
-        assetFile = 'assets/icons/green_style_white_small.png';
-        break;
-      case 4: // TODO: Change image according to category
-        assetFile = 'assets/icons/green_style_white_small.png';
-        break;
-      case 5: // TODO: Change image according to category
-        assetFile = 'assets/icons/green_style_white_small.png';
+      case 3:
+        imageAsset = Image.asset('assets/icons/light_icon.png', width: 150);
         break;
       default:
-        assetFile = 'assets/icons/green_style_white_small.png';
         break;
     }
-
     return Center(
         // TODO: Create proper widget selection according to category
-        child: Image.asset(assetFile, width: 350));
+        child: imageAsset);
   }
 }
