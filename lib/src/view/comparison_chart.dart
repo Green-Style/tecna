@@ -65,16 +65,30 @@ class ComparisonChart extends StatelessWidget {
                         child: Align(
                           alignment: FractionalOffset.center,
                           child: SizedBox(
-                            height: 250,
+                            height: 300,
                             width: double.infinity,
                             child: Center(
                               child: Column(
                                 children: [
-                                  Co2BarChart(dataList: snapshot.data!.dataList),
+                                  SizedBox(
+                                    height: 250,
+                                    width: double.infinity,
+                                    child: Center(
+                                      child: Co2BarChart(dataList: snapshot.data!.dataList),
+                                    ),
+                                  ),
                                   Row(
-                                    children: [
-
-                                    ],
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: snapshot.data!.labels.asMap().map<int, Widget>((key, data) {
+                                      final value = Padding(
+                                        padding: const EdgeInsets.only(top: 5, left: 35),
+                                        child: Text(
+                                          data,
+                                          // TODO: Incluir style
+                                        ),
+                                      );
+                                      return MapEntry(key, value);
+                                    }).values.toList(growable: false),
                                   )
                                 ],
                               ),
@@ -128,15 +142,15 @@ class _Co2BarChartState extends State<Co2BarChart> {
     return Padding(
       padding: const EdgeInsets.all(24),
       child: AspectRatio(
-        aspectRatio: 1.4,
+        aspectRatio: 1.5,
         child: BarChart(
           BarChartData(
-            alignment: BarChartAlignment.spaceBetween,
+            alignment: BarChartAlignment.spaceEvenly,
             borderData: FlBorderData(
               show: true,
               border: Border.symmetric(
                 horizontal: BorderSide(
-                  color: AppColors.borderColor.withOpacity(0.2),
+                  color: borderColor.withOpacity(0.2),
                 ),
               ),
             ),
@@ -145,7 +159,7 @@ class _Co2BarChartState extends State<Co2BarChart> {
               leftTitles: AxisTitles(
                 sideTitles: SideTitles(
                   showTitles: true,
-                  reservedSize: 30,
+                  reservedSize: 50,
                   getTitlesWidget: (value, meta) {
                     return Text(
                       value.toInt().toString(),
@@ -177,7 +191,7 @@ class _Co2BarChartState extends State<Co2BarChart> {
               show: true,
               drawVerticalLine: false,
               getDrawingHorizontalLine: (value) => FlLine(
-                color: AppColors.borderColor.withOpacity(0.2),
+                color: borderColor.withOpacity(0.5),
                 strokeWidth: 1,
               ),
             ),
@@ -207,7 +221,7 @@ class _Co2BarChartState extends State<Co2BarChart> {
                     TextStyle(
                       fontWeight: FontWeight.bold,
                       color: rod.color,
-                      fontSize: 18,
+                      fontSize: 15,
                       shadows: const [
                         Shadow(
                           color: Colors.black26,
@@ -287,28 +301,4 @@ class _IconWidgetState extends AnimatedWidgetBaseState<_IconWidget> {
       ),
     ) as Tween<double>?;
   }
-}
-
-class AppColors {
-  static const Color primary = contentColorCyan;
-  static const Color menuBackground = Color(0xFF090912);
-  static const Color itemsBackground = Color(0xFF1B2339);
-  static const Color pageBackground = Color(0xFF282E45);
-  static const Color mainTextColor1 = Colors.white;
-  static const Color mainTextColor2 = Colors.white70;
-  static const Color mainTextColor3 = Colors.white38;
-  static const Color mainGridLineColor = Colors.white10;
-  static const Color borderColor = Colors.white54;
-  static const Color gridLinesColor = Color(0x11FFFFFF);
-
-  static const Color contentColorBlack = Colors.black;
-  static const Color contentColorWhite = Colors.white;
-  static const Color contentColorBlue = Color(0xFF2196F3);
-  static const Color contentColorYellow = Color(0xFFFFC300);
-  static const Color contentColorOrange = Color(0xFFFF683B);
-  static const Color contentColorGreen = Color(0xFF3BFF49);
-  static const Color contentColorPurple = Color(0xFF6E1BFF);
-  static const Color contentColorPink = Color(0xFFFF3AF2);
-  static const Color contentColorRed = Color(0xFFE80054);
-  static const Color contentColorCyan = Color(0xFF50E4FF);
 }
