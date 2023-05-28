@@ -17,6 +17,7 @@ class InfoChart extends StatefulWidget {
 class PieChart2State extends State {
   int touchedIndex = -1;
   Future<HomeData>? _chartFuture;
+  String selectedSuggestion = '';
   final homeCtrl = HomeController();
 
   Future<String?> getUserToken() async {
@@ -26,7 +27,7 @@ class PieChart2State extends State {
 
   Future<HomeData> _getUserInfoChartData() async {
     final data = await homeCtrl.getUserInfoChartData(await getUserToken());
-
+    // selectedSuggestion = data.suggestion;
     return data;
   }
 
@@ -105,16 +106,13 @@ class PieChart2State extends State {
                                                       (FlTouchEvent event,
                                                           pieTouchResponse) {
                                                     setState(() {
-                                                      if (pieTouchResponse ==
+                                                      if (!event
+                                                              .isInterestedForInteractions ||
+                                                          pieTouchResponse ==
                                                               null ||
                                                           pieTouchResponse
                                                                   .touchedSection ==
                                                               null) {
-                                                        return;
-                                                      }
-
-                                                      if (touchedIndex >= 0) {
-                                                        touchedIndex = -1;
                                                         return;
                                                       }
 
@@ -123,7 +121,10 @@ class PieChart2State extends State {
                                                               .touchedSection!
                                                               .touchedSectionIndex;
 
-                                                      return;
+                                                      _setSelectedSuggestion(
+                                                          snapshot.data!
+                                                              .userChartData,
+                                                          touchedIndex);
                                                     });
                                                   },
                                                 ),
@@ -153,7 +154,9 @@ class PieChart2State extends State {
                             margin: const EdgeInsets.only(top: 25.0, bottom: 5),
                             child: Center(
                               child: Text(
-                                snapshot.data!.suggestion,
+                                selectedSuggestion == ''
+                                    ? snapshot.data!.suggestion
+                                    : selectedSuggestion,
                                 style: const TextStyle(color: Colors.white),
                                 textAlign: TextAlign.center,
                               ),
@@ -218,6 +221,11 @@ class PieChart2State extends State {
                                                       touchedIndex == idx
                                                           ? -1
                                                           : idx;
+
+                                                  _setSelectedSuggestion(
+                                                      snapshot
+                                                          .data!.userChartData,
+                                                      touchedIndex);
                                                 });
                                               },
                                               child: Text(
@@ -247,6 +255,14 @@ class PieChart2State extends State {
         }
       },
     );
+  }
+
+  _setSelectedSuggestion(userChartData, touchedIndex) {
+    if (touchedIndex >= 0) {
+      selectedSuggestion = userChartData[touchedIndex].suggestion;
+    } else {
+      selectedSuggestion = '';
+    }
   }
 
   List<PieChartSectionData> showingSections(
