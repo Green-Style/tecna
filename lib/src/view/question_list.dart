@@ -188,31 +188,22 @@ class _QuestionListState extends State<QuestionList> {
   }
 
   Widget buildImage(int categoryId) {
-    String assetFile = '';
+    Image imageAsset =
+        Image.asset('assets/icons/carbon_footprint.png', width: 140);
 
     switch (categoryId) {
-      case 1: // TODO: Change image according to category
-        assetFile = 'assets/icons/green_style_white_small.png';
+      case 1:
+        imageAsset = Image.asset('assets/icons/car_icon.png', width: 250);
         break;
-      case 2: // TODO: Change image according to category
-        assetFile = 'assets/icons/green_style_white_small.png';
+      case 2:
+        imageAsset = Image.asset('assets/icons/food_icon.png', width: 130);
         break;
-      case 3: // TODO: Change image according to category
-        assetFile = 'assets/icons/green_style_white_small.png';
-        break;
-      case 4: // TODO: Change image according to category
-        assetFile = 'assets/icons/green_style_white_small.png';
-        break;
-      case 5: // TODO: Change image according to category
-        assetFile = 'assets/icons/green_style_white_small.png';
+      case 3:
+        imageAsset = Image.asset('assets/icons/light_icon.png', width: 150);
         break;
       default:
-        assetFile = 'assets/icons/green_style_white_small.png';
         break;
     }
-
-    return Center(
-        // TODO: Create proper widget selection according to category
-        child: Image.asset(assetFile, width: 150));
+    return Center(child: imageAsset);
   }
 }
