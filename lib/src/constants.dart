@@ -33,30 +33,24 @@ class GreenStyleBottomNavigationBar extends StatefulWidget {
   final int selectedIndex;
 
   @override
-  State<GreenStyleBottomNavigationBar> createState() => _GreenStyleBottomNavigationBarState();
+  State<GreenStyleBottomNavigationBar> createState() =>
+      _GreenStyleBottomNavigationBarState();
 }
 
-class _GreenStyleBottomNavigationBarState extends State<GreenStyleBottomNavigationBar> {
-  @override Widget build(BuildContext context) {
+class _GreenStyleBottomNavigationBarState
+    extends State<GreenStyleBottomNavigationBar> {
+  @override
+  Widget build(BuildContext context) {
     return BottomNavigationBar(
       currentIndex: widget.selectedIndex,
       items: const [
         BottomNavigationBarItem(
-          icon: FaIcon(FontAwesomeIcons.house),
-          label: ''
-        ),
+            icon: FaIcon(FontAwesomeIcons.house), label: ''),
         BottomNavigationBarItem(
-          icon: FaIcon(FontAwesomeIcons.chartPie),
-          label: ''
-        ),
+            icon: FaIcon(FontAwesomeIcons.chartPie), label: ''),
         BottomNavigationBarItem(
-          icon: FaIcon(FontAwesomeIcons.clipboardQuestion),
-          label: ''
-        ),
-        BottomNavigationBarItem(
-          icon: FaIcon(FontAwesomeIcons.gear),
-          label: ''
-        ),
+            icon: FaIcon(FontAwesomeIcons.clipboardQuestion), label: ''),
+        BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.gear), label: ''),
       ],
       selectedItemColor: buttonBackgroundColor,
       unselectedItemColor: Colors.grey,
@@ -65,24 +59,16 @@ class _GreenStyleBottomNavigationBarState extends State<GreenStyleBottomNavigati
       onTap: (index) {
         switch (index) {
           case 0:
-            Navigator.of(context).pushNamed(
-              '/home'
-            );
+            Navigator.of(context).pushNamed('/home');
             break;
           case 1:
-            Navigator.of(context).pushNamed(
-              '/compare'
-            );
+            Navigator.of(context).pushNamed('/compare');
             break;
           case 2:
-            Navigator.of(context).pushNamed(
-              '/quiz'
-            );
+            Navigator.of(context).pushNamed('/quiz');
             break;
           case 3:
-            Navigator.of(context).pushNamed(
-              '/account'
-            );
+            Navigator.of(context).pushNamed('/account');
             break;
         }
       },
