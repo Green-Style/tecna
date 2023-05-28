@@ -50,7 +50,7 @@ class _GreenStyleBottomNavigationBarState
         BottomNavigationBarItem(
             icon: FaIcon(FontAwesomeIcons.house), label: ''),
         BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.chartPie), label: ''),
+            icon: FaIcon(FontAwesomeIcons.chartColumn), label: ''),
         BottomNavigationBarItem(
             icon: FaIcon(FontAwesomeIcons.clipboardQuestion), label: ''),
         BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.gear), label: ''),
@@ -62,75 +62,75 @@ class _GreenStyleBottomNavigationBarState
       onTap: (index) {
         switch (index) {
           case 0:
-            Navigator.of(context).push(
-              PageRouteBuilder(
-                pageBuilder: (context, animation, secondaryAnimation) => const HomePage(),
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                  const begin = Offset(0.0, 1.0);
-                  const end = Offset.zero;
-                  const curve = Curves.ease;
+            Navigator.of(context).push(PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) =>
+                  const HomePage(),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                const begin = Offset(0.0, 1.0);
+                const end = Offset.zero;
+                const curve = Curves.ease;
 
-                  final tween = Tween(begin: begin, end: end);
-                  final curvedAnimation = CurvedAnimation(
-                    parent: animation,
-                    curve: curve,
-                  );
+                final tween = Tween(begin: begin, end: end);
+                final curvedAnimation = CurvedAnimation(
+                  parent: animation,
+                  curve: curve,
+                );
 
-                  return SlideTransition(
-                    position: tween.animate(curvedAnimation),
-                    child: child,
-                  );
-                },
-              )
-            );
+                return SlideTransition(
+                  position: tween.animate(curvedAnimation),
+                  child: child,
+                );
+              },
+            ));
             break;
           case 1:
             // Navigator.of(context).pushNamed('/compare');
-            Navigator.of(context).push(
-              PageRouteBuilder(
-                pageBuilder: (context, animation, secondaryAnimation) => const ComparisonScreen(),
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                  const begin = Offset(0.0, 1.0);
-                  const end = Offset.zero;
-                  const curve = Curves.ease;
+            Navigator.of(context).push(PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) =>
+                  const ComparisonScreen(),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                const begin = Offset(0.0, 1.0);
+                const end = Offset.zero;
+                const curve = Curves.ease;
 
-                  final tween = Tween(begin: begin, end: end);
-                  final curvedAnimation = CurvedAnimation(
-                    parent: animation,
-                    curve: curve,
-                  );
+                final tween = Tween(begin: begin, end: end);
+                final curvedAnimation = CurvedAnimation(
+                  parent: animation,
+                  curve: curve,
+                );
 
-                  return SlideTransition(
-                    position: tween.animate(curvedAnimation),
-                    child: child,
-                  );
-                },
-              )
-            );
+                return SlideTransition(
+                  position: tween.animate(curvedAnimation),
+                  child: child,
+                );
+              },
+            ));
             break;
           case 2:
             // Navigator.of(context).pushNamed('/quiz');
-            Navigator.of(context).push(
-              PageRouteBuilder(
-                pageBuilder: (context, animation, secondaryAnimation) => const QuestionnaireScreen(),
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                  const begin = Offset(0.0, 1.0);
-                  const end = Offset.zero;
-                  const curve = Curves.ease;
+            Navigator.of(context).push(PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) =>
+                  const QuestionnaireScreen(),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                const begin = Offset(0.0, 1.0);
+                const end = Offset.zero;
+                const curve = Curves.ease;
 
-                  final tween = Tween(begin: begin, end: end);
-                  final curvedAnimation = CurvedAnimation(
-                    parent: animation,
-                    curve: curve,
-                  );
+                final tween = Tween(begin: begin, end: end);
+                final curvedAnimation = CurvedAnimation(
+                  parent: animation,
+                  curve: curve,
+                );
 
-                  return SlideTransition(
-                    position: tween.animate(curvedAnimation),
-                    child: child,
-                  );
-                },
-              )
-            );
+                return SlideTransition(
+                  position: tween.animate(curvedAnimation),
+                  child: child,
+                );
+              },
+            ));
             break;
           case 3:
             // Navigator.of(context).pushNamed('/account');

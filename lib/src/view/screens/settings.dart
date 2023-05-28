@@ -12,7 +12,8 @@ class SettingsScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: SettingsUserInfo(),
-        bottomNavigationBar: GreenStyleBottomNavigationBar(),
+        bottomNavigationBar:
+            const GreenStyleBottomNavigationBar(selectedIndex: 4),
       ),
     );
   }

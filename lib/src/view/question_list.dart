@@ -5,6 +5,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:green_style/src/controller/question_controller.dart';
 
 class QuestionList extends StatefulWidget {
+  const QuestionList({super.key});
+
   @override
   State<QuestionList> createState() => _QuestionListState();
 }
