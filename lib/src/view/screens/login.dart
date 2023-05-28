@@ -181,6 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     try {
       await loginCtl.signIn(email, password);
+      _clearInputs();
       Navigator.of(context).pushReplacementNamed('/prehome');
     } catch (_) {
       _showErrorDialog('Verifique seus dados.');
@@ -205,5 +206,10 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       },
     );
+  }
+
+  void _clearInputs() {
+    _passwordController.clear();
+    _emailController.clear();
   }
 }
