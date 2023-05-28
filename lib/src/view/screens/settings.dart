@@ -13,7 +13,7 @@ class SettingsScreen extends StatelessWidget {
       child: Scaffold(
         body: SettingsUserInfo(),
         bottomNavigationBar:
-            const GreenStyleBottomNavigationBar(selectedIndex: 4),
+            const GreenStyleBottomNavigationBar(selectedIndex: 3),
       ),
     );
   }
