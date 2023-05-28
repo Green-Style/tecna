@@ -8,10 +8,10 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return const SafeArea(
       child: Scaffold(
           body: InfoChart(),
-          bottomNavigationBar: GreenStyleBottomNavigationBar(),
+          bottomNavigationBar: GreenStyleBottomNavigationBar(selectedIndex: 0),
         ),
     );
   }
