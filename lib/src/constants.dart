@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:green_style/src/view/screens/comparison_screen.dart';
+import 'package:green_style/src/view/screens/home.dart';
+import 'package:green_style/src/view/screens/questionnaire.dart';
 
 // Text
 const String appName = 'Green Style';
@@ -59,16 +62,100 @@ class _GreenStyleBottomNavigationBarState
       onTap: (index) {
         switch (index) {
           case 0:
-            Navigator.of(context).pushNamed('/home');
+            Navigator.of(context).push(
+              PageRouteBuilder(
+                pageBuilder: (context, animation, secondaryAnimation) => const HomePage(),
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  const begin = Offset(0.0, 1.0);
+                  const end = Offset.zero;
+                  const curve = Curves.ease;
+
+                  final tween = Tween(begin: begin, end: end);
+                  final curvedAnimation = CurvedAnimation(
+                    parent: animation,
+                    curve: curve,
+                  );
+
+                  return SlideTransition(
+                    position: tween.animate(curvedAnimation),
+                    child: child,
+                  );
+                },
+              )
+            );
             break;
           case 1:
-            Navigator.of(context).pushNamed('/compare');
+            // Navigator.of(context).pushNamed('/compare');
+            Navigator.of(context).push(
+              PageRouteBuilder(
+                pageBuilder: (context, animation, secondaryAnimation) => const ComparisonScreen(),
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  const begin = Offset(0.0, 1.0);
+                  const end = Offset.zero;
+                  const curve = Curves.ease;
+
+                  final tween = Tween(begin: begin, end: end);
+                  final curvedAnimation = CurvedAnimation(
+                    parent: animation,
+                    curve: curve,
+                  );
+
+                  return SlideTransition(
+                    position: tween.animate(curvedAnimation),
+                    child: child,
+                  );
+                },
+              )
+            );
             break;
           case 2:
-            Navigator.of(context).pushNamed('/quiz');
+            // Navigator.of(context).pushNamed('/quiz');
+            Navigator.of(context).push(
+              PageRouteBuilder(
+                pageBuilder: (context, animation, secondaryAnimation) => const QuestionnaireScreen(),
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  const begin = Offset(0.0, 1.0);
+                  const end = Offset.zero;
+                  const curve = Curves.ease;
+
+                  final tween = Tween(begin: begin, end: end);
+                  final curvedAnimation = CurvedAnimation(
+                    parent: animation,
+                    curve: curve,
+                  );
+
+                  return SlideTransition(
+                    position: tween.animate(curvedAnimation),
+                    child: child,
+                  );
+                },
+              )
+            );
             break;
           case 3:
-            Navigator.of(context).pushNamed('/account');
+            // Navigator.of(context).pushNamed('/account');
+            // TODO: Descomentar ao criar tela de config/conta
+            // Navigator.of(context).push(
+            //   PageRouteBuilder(
+            //     pageBuilder: (context, animation, secondaryAnimation) => const AccountScreen(),
+            //     transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            //       const begin = Offset(0.0, 1.0);
+            //       const end = Offset.zero;
+            //       const curve = Curves.ease;
+
+            //       final tween = Tween(begin: begin, end: end);
+            //       final curvedAnimation = CurvedAnimation(
+            //         parent: animation,
+            //         curve: curve,
+            //       );
+
+            //       return SlideTransition(
+            //         position: tween.animate(curvedAnimation),
+            //         child: child,
+            //       );
+            //     },
+            //   )
+            // );
             break;
         }
       },
