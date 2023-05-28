@@ -152,13 +152,16 @@ class PieChart2State extends State {
                           ),
                           Container(
                             margin: const EdgeInsets.only(top: 25.0, bottom: 5),
-                            child: Center(
-                              child: Text(
-                                selectedSuggestion == ''
-                                    ? snapshot.data!.suggestion
-                                    : selectedSuggestion,
-                                style: const TextStyle(color: Colors.white),
-                                textAlign: TextAlign.center,
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Center(
+                                child: Text(
+                                  selectedSuggestion == ''
+                                      ? snapshot.data!.suggestion
+                                      : selectedSuggestion,
+                                  style: const TextStyle(color: Colors.white),
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
                             ),
                           ),
