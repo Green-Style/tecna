@@ -64,6 +64,8 @@ class _GreenStyleBottomNavigationBarState
         switch (index) {
           case 0:
             Navigator.of(context).push(PageRouteBuilder(
+              transitionDuration: Duration.zero,
+              reverseTransitionDuration: Duration.zero,
               pageBuilder: (context, animation, secondaryAnimation) =>
                   const HomePage(),
               transitionsBuilder:
@@ -88,6 +90,8 @@ class _GreenStyleBottomNavigationBarState
           case 1:
             // Navigator.of(context).pushNamed('/compare');
             Navigator.of(context).push(PageRouteBuilder(
+              transitionDuration: Duration.zero,
+              reverseTransitionDuration: Duration.zero,
               pageBuilder: (context, animation, secondaryAnimation) =>
                   const ComparisonScreen(),
               transitionsBuilder:
@@ -112,6 +116,8 @@ class _GreenStyleBottomNavigationBarState
           case 2:
             // Navigator.of(context).pushNamed('/quiz');
             Navigator.of(context).push(PageRouteBuilder(
+              transitionDuration: Duration.zero,
+              reverseTransitionDuration: Duration.zero,
               pageBuilder: (context, animation, secondaryAnimation) =>
                   const QuestionnaireScreen(),
               transitionsBuilder:
@@ -137,6 +143,8 @@ class _GreenStyleBottomNavigationBarState
             // Navigator.of(context).pushNamed('/account');
             //TODO: Descomentar ao criar tela de config/conta
             Navigator.of(context).push(PageRouteBuilder(
+              transitionDuration: Duration.zero,
+              reverseTransitionDuration: Duration.zero,
               pageBuilder: (context, animation, secondaryAnimation) =>
                   SettingsScreen(),
               transitionsBuilder:
