@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:green_style/src/constants.dart';
 import 'package:green_style/src/model/question.dart';
-import 'package:introduction_screen/introduction_screen.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:green_style/src/controller/question_controller.dart';
 
@@ -16,12 +15,6 @@ class _QuestionListState extends State<QuestionList> {
   Future<List<Question>>? _questionsFuture;
   int? _groupValue;
   int _index = 0;
-
-  @override
-  initState() {
-    _questionsFuture = _getForm();
-    super.initState();
-  }
 
   Future<String?> getUserToken() async {
     const storage = FlutterSecureStorage();
@@ -41,6 +34,12 @@ class _QuestionListState extends State<QuestionList> {
   }
 
   @override
+  initState() {
+    _questionsFuture = _getForm();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: _questionsFuture,
@@ -52,108 +51,134 @@ class _QuestionListState extends State<QuestionList> {
             if (snapshot.hasError) {
               return Text("Error: ${snapshot.error}");
             } else {
-              return DecoratedBox(
-                decoration: BoxDecoration(
-                  color: darkBackgroundColor,
+              return Scaffold(
+                bottomNavigationBar: SizedBox(
+                  height: 40,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: _groupValue != null
+                            ? Colors.green
+                            : const Color.fromARGB(10, 158, 158, 158),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(0))),
+                    child: Text(_index == (snapshot.data!.length - 1)
+                        ? 'Terminar'
+                        : 'Avançar'),
+                    onPressed: () {
+                      if (_groupValue != null) {
+                        if (_index == (snapshot.data!.length - 1)) {
+                          answers.add({
+                            'question': snapshot.data![_index].id,
+                            'option': _groupValue
+                          });
+                          _saveForm().then((value) {
+                            Navigator.of(context).pushReplacementNamed('/home');
+                          }, onError: (error) {
+                            return Text(error);
+                          });
+                        } else {
+                          setState(() {
+                            answers.add({
+                              'question': snapshot.data![_index].id,
+                              'option': _groupValue
+                            });
+                            _groupValue = null;
+                            _index++;
+                          });
+                        }
+                      }
+                    },
+                  ),
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
-                      children: [
-                        SizedBox(
-                          height: 160,
-                          width: double.infinity,
-                          child: Center(
-                            child: buildImage(snapshot.data![_index].category.id),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Center(
-                            child: Text(
-                              snapshot.data![_index].description,
-                              style: TextStyle(
-                                color: Colors.white
-                              ),
+                body: DecoratedBox(
+                  decoration: const BoxDecoration(
+                    color: darkBackgroundColor,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        children: [
+                          SizedBox(
+                            height: 160,
+                            width: double.infinity,
+                            child: Center(
+                              child: buildImage(
+                                  snapshot.data![_index].category.id),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Expanded(
-                      child: DecoratedBox( // Legendas
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: const BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0)),
-                          border: Border.all(
-                            style: BorderStyle.none
-                          )
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: snapshot.data![_index].options.map(
-                                  (e) => Container(
-                                    padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 5),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(2.0),
-                                      child: SizedBox(
-                                        width: 300,
-                                        child: RadioListTile(
-                                          value: e.id,
-                                          title: Text(
-                                            e.description
-                                          ),
-                                          groupValue: _groupValue,
-                                          onChanged: (val) {
-                                            setState(() {
-                                              _groupValue = val;
-                                            });
-                                          },
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ).toList()
-                              ),
-                            ),
-                            ElevatedButton(
-                              child: Text(
-                                _index == (snapshot.data!.length - 1) ? 'Terminar' : 'Avançar'
-                              ),
-                              onPressed: () {
-                                if (_groupValue != null) {
-                                  if (_index == (snapshot.data!.length - 1)) {
-                                    answers.add({'question': snapshot.data![_index].id, 'option': _groupValue});
-                                    _saveForm().then((value) {
-                                      Navigator.of(context).pushReplacementNamed('/home');
-                                    }, onError: (error) {
-                                      return Text(error);
-                                    });
-                                  } else {
-                                    setState(() {
-                                      answers.add({'question': snapshot.data![_index].id, 'option': _groupValue});
-                                      _groupValue = null;
-                                      _index++;
-                                    });
-                                  }
-                                }
-                              },
-                            ),
-                          ],
-                        ),
+                        ],
                       ),
-                    )
-                  ],
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Expanded(
+                        child: DecoratedBox(
+                          // Legendas
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(20.0),
+                                  topRight: Radius.circular(20.0)),
+                              border: Border.all(style: BorderStyle.none)),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Container(
+                                padding: const EdgeInsets.all(10.0),
+                                margin: const EdgeInsets.only(left: 15),
+                                child: Center(
+                                  child: Text(
+                                    snapshot.data![_index].description,
+                                    textAlign: TextAlign.left,
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: snapshot.data![_index].options
+                                      .map((e) => SizedBox(
+                                            width: 500,
+                                            child: RadioListTile(
+                                              value: e.id,
+                                              title: Text(e.description,
+                                                  style: _groupValue == e.id
+                                                      ? const TextStyle(
+                                                          decoration:
+                                                              TextDecoration
+                                                                  .underline,
+                                                          fontSize: 18,
+                                                          fontStyle:
+                                                              FontStyle.italic,
+                                                          color: Colors.green,
+                                                          fontWeight:
+                                                              FontWeight.w900)
+                                                      : const TextStyle()),
+                                              groupValue: _groupValue,
+                                              onChanged: (val) {
+                                                setState(() {
+                                                  _groupValue = val;
+                                                });
+                                              },
+                                            ),
+                                          ))
+                                      .toList()),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               );
             }
@@ -163,31 +188,22 @@ class _QuestionListState extends State<QuestionList> {
   }
 
   Widget buildImage(int categoryId) {
-    String assetFile = '';
+    Image imageAsset =
+        Image.asset('assets/icons/carbon_footprint.png', width: 140);
 
     switch (categoryId) {
-      case 1: // TODO: Change image according to category
-        assetFile = 'assets/icons/green_style_white_small.png';
+      case 1:
+        imageAsset = Image.asset('assets/icons/car_icon.png', width: 250);
         break;
-      case 2: // TODO: Change image according to category
-        assetFile = 'assets/icons/green_style_white_small.png';
+      case 2:
+        imageAsset = Image.asset('assets/icons/food_icon.png', width: 130);
         break;
-      case 3: // TODO: Change image according to category
-        assetFile = 'assets/icons/green_style_white_small.png';
-        break;
-      case 4: // TODO: Change image according to category
-        assetFile = 'assets/icons/green_style_white_small.png';
-        break;
-      case 5: // TODO: Change image according to category
-        assetFile = 'assets/icons/green_style_white_small.png';
+      case 3:
+        imageAsset = Image.asset('assets/icons/light_icon.png', width: 150);
         break;
       default:
-        assetFile = 'assets/icons/green_style_white_small.png';
         break;
     }
-
-    return Center(
-        // TODO: Create proper widget selection according to category
-        child: Image.asset(assetFile, width: 150));
+    return Center(child: imageAsset);
   }
 }

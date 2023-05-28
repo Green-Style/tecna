@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:green_style/src/view/screens/comparison_screen.dart';
+import 'package:green_style/src/view/screens/home.dart';
+import 'package:green_style/src/view/screens/questionnaire.dart';
 
 // Text
 const String appName = 'Green Style';
@@ -29,65 +32,130 @@ final greenStyleTheme = ThemeData(
 
 // Complexer widgets
 class GreenStyleBottomNavigationBar extends StatefulWidget {
-
+  const GreenStyleBottomNavigationBar({super.key, required this.selectedIndex});
+  final int selectedIndex;
 
   @override
-  State<GreenStyleBottomNavigationBar> createState() => _GreenStyleBottomNavigationBarState();
+  State<GreenStyleBottomNavigationBar> createState() =>
+      _GreenStyleBottomNavigationBarState();
 }
 
-class _GreenStyleBottomNavigationBarState extends State<GreenStyleBottomNavigationBar> {
-  int _currentIndex = 0;
-
-  @override Widget build(BuildContext context) {
+class _GreenStyleBottomNavigationBarState
+    extends State<GreenStyleBottomNavigationBar> {
+  @override
+  Widget build(BuildContext context) {
     return BottomNavigationBar(
-      currentIndex: _currentIndex,
+      currentIndex: widget.selectedIndex,
       items: const [
         BottomNavigationBarItem(
-          icon: FaIcon(FontAwesomeIcons.house),
-          label: ''
-        ),
+            icon: FaIcon(FontAwesomeIcons.house), label: ''),
         BottomNavigationBarItem(
-          icon: FaIcon(FontAwesomeIcons.chartPie),
-          label: ''
-        ),
+            icon: FaIcon(FontAwesomeIcons.chartPie), label: ''),
         BottomNavigationBarItem(
-          icon: FaIcon(FontAwesomeIcons.clipboardQuestion),
-          label: ''
-        ),
-        BottomNavigationBarItem(
-          icon: FaIcon(FontAwesomeIcons.gear),
-          label: ''
-        ),
+            icon: FaIcon(FontAwesomeIcons.clipboardQuestion), label: ''),
+        BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.gear), label: ''),
       ],
       selectedItemColor: buttonBackgroundColor,
       unselectedItemColor: Colors.grey,
       showSelectedLabels: false,
       showUnselectedLabels: false,
       onTap: (index) {
-        setState(() {
-          _currentIndex = index;
-        });
-
         switch (index) {
           case 0:
-            Navigator.of(context).pushReplacementNamed(
-              '/home'
+            Navigator.of(context).push(
+              PageRouteBuilder(
+                pageBuilder: (context, animation, secondaryAnimation) => const HomePage(),
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  const begin = Offset(0.0, 1.0);
+                  const end = Offset.zero;
+                  const curve = Curves.ease;
+
+                  final tween = Tween(begin: begin, end: end);
+                  final curvedAnimation = CurvedAnimation(
+                    parent: animation,
+                    curve: curve,
+                  );
+
+                  return SlideTransition(
+                    position: tween.animate(curvedAnimation),
+                    child: child,
+                  );
+                },
+              )
             );
             break;
           case 1:
-            Navigator.of(context).pushReplacementNamed(
-              '/compare'
+            // Navigator.of(context).pushNamed('/compare');
+            Navigator.of(context).push(
+              PageRouteBuilder(
+                pageBuilder: (context, animation, secondaryAnimation) => const ComparisonScreen(),
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  const begin = Offset(0.0, 1.0);
+                  const end = Offset.zero;
+                  const curve = Curves.ease;
+
+                  final tween = Tween(begin: begin, end: end);
+                  final curvedAnimation = CurvedAnimation(
+                    parent: animation,
+                    curve: curve,
+                  );
+
+                  return SlideTransition(
+                    position: tween.animate(curvedAnimation),
+                    child: child,
+                  );
+                },
+              )
             );
             break;
           case 2:
-            Navigator.of(context).pushReplacementNamed(
-              '/quiz'
+            // Navigator.of(context).pushNamed('/quiz');
+            Navigator.of(context).push(
+              PageRouteBuilder(
+                pageBuilder: (context, animation, secondaryAnimation) => const QuestionnaireScreen(),
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  const begin = Offset(0.0, 1.0);
+                  const end = Offset.zero;
+                  const curve = Curves.ease;
+
+                  final tween = Tween(begin: begin, end: end);
+                  final curvedAnimation = CurvedAnimation(
+                    parent: animation,
+                    curve: curve,
+                  );
+
+                  return SlideTransition(
+                    position: tween.animate(curvedAnimation),
+                    child: child,
+                  );
+                },
+              )
             );
             break;
           case 3:
-            Navigator.of(context).pushReplacementNamed(
-              '/account'
-            );
+            // Navigator.of(context).pushNamed('/account');
+            // TODO: Descomentar ao criar tela de config/conta
+            // Navigator.of(context).push(
+            //   PageRouteBuilder(
+            //     pageBuilder: (context, animation, secondaryAnimation) => const AccountScreen(),
+            //     transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            //       const begin = Offset(0.0, 1.0);
+            //       const end = Offset.zero;
+            //       const curve = Curves.ease;
+
+            //       final tween = Tween(begin: begin, end: end);
+            //       final curvedAnimation = CurvedAnimation(
+            //         parent: animation,
+            //         curve: curve,
+            //       );
+
+            //       return SlideTransition(
+            //         position: tween.animate(curvedAnimation),
+            //         child: child,
+            //       );
+            //     },
+            //   )
+            // );
             break;
         }
       },
