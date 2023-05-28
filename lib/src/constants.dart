@@ -61,6 +61,9 @@ class _GreenStyleBottomNavigationBarState
       showSelectedLabels: false,
       showUnselectedLabels: false,
       onTap: (index) {
+        if (widget.selectedIndex == index) {
+          return;
+        }
         switch (index) {
           case 0:
             Navigator.of(context).push(PageRouteBuilder(
