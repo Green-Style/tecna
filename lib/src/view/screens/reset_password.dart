@@ -16,7 +16,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
       appBar: AppBar(
         title: Text('Recuperar senha'),
       ),
-      bottomNavigationBar: GreenStyleBottomNavigationBar(),
+      // TODO: Analisar necessidade de navigation bar nessa tela
+      //bottomNavigationBar: GreenStyleBottomNavigationBar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(

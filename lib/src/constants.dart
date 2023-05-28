@@ -29,18 +29,17 @@ final greenStyleTheme = ThemeData(
 
 // Complexer widgets
 class GreenStyleBottomNavigationBar extends StatefulWidget {
-
+  const GreenStyleBottomNavigationBar({super.key, required this.selectedIndex});
+  final int selectedIndex;
 
   @override
   State<GreenStyleBottomNavigationBar> createState() => _GreenStyleBottomNavigationBarState();
 }
 
 class _GreenStyleBottomNavigationBarState extends State<GreenStyleBottomNavigationBar> {
-  int _currentIndex = 0;
-
   @override Widget build(BuildContext context) {
     return BottomNavigationBar(
-      currentIndex: _currentIndex,
+      currentIndex: widget.selectedIndex,
       items: const [
         BottomNavigationBarItem(
           icon: FaIcon(FontAwesomeIcons.house),
@@ -64,28 +63,24 @@ class _GreenStyleBottomNavigationBarState extends State<GreenStyleBottomNavigati
       showSelectedLabels: false,
       showUnselectedLabels: false,
       onTap: (index) {
-        setState(() {
-          _currentIndex = index;
-        });
-
         switch (index) {
           case 0:
-            Navigator.of(context).pushReplacementNamed(
+            Navigator.of(context).pushNamed(
               '/home'
             );
             break;
           case 1:
-            Navigator.of(context).pushReplacementNamed(
+            Navigator.of(context).pushNamed(
               '/compare'
             );
             break;
           case 2:
-            Navigator.of(context).pushReplacementNamed(
+            Navigator.of(context).pushNamed(
               '/quiz'
             );
             break;
           case 3:
-            Navigator.of(context).pushReplacementNamed(
+            Navigator.of(context).pushNamed(
               '/account'
             );
             break;

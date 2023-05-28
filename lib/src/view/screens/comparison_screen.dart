@@ -10,7 +10,7 @@ class ComparisonScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
           body: ComparisonChart(),
-          bottomNavigationBar: GreenStyleBottomNavigationBar(),
+          bottomNavigationBar: const GreenStyleBottomNavigationBar(selectedIndex: 1),
         ),
     );
   }
