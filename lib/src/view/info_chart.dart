@@ -16,6 +16,7 @@ class InfoChart extends StatefulWidget {
 
 class PieChart2State extends State {
   int touchedIndex = -1;
+  Future<HomeData>? _chartFuture;
   final homeCtrl = HomeController();
 
   Future<String?> getUserToken() async {
@@ -30,9 +31,15 @@ class PieChart2State extends State {
   }
 
   @override
+  void initState() {
+    _chartFuture = _getUserInfoChartData();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _getUserInfoChartData(),
+      future: _chartFuture,
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
