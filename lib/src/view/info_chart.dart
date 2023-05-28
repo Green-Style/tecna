@@ -16,6 +16,7 @@ class InfoChart extends StatefulWidget {
 
 class PieChart2State extends State {
   int touchedIndex = -1;
+  Future<HomeData>? _chartFuture;
   String selectedSuggestion = '';
   final homeCtrl = HomeController();
 
@@ -31,9 +32,15 @@ class PieChart2State extends State {
   }
 
   @override
+  void initState() {
+    _chartFuture = _getUserInfoChartData();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _getUserInfoChartData(),
+      future: _chartFuture,
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
@@ -145,13 +152,16 @@ class PieChart2State extends State {
                           ),
                           Container(
                             margin: const EdgeInsets.only(top: 25.0, bottom: 5),
-                            child: Center(
-                              child: Text(
-                                selectedSuggestion == ''
-                                    ? snapshot.data!.suggestion
-                                    : selectedSuggestion,
-                                style: const TextStyle(color: Colors.white),
-                                textAlign: TextAlign.center,
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Center(
+                                child: Text(
+                                  selectedSuggestion == ''
+                                      ? snapshot.data!.suggestion
+                                      : selectedSuggestion,
+                                  style: const TextStyle(color: Colors.white),
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
                             ),
                           ),

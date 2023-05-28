@@ -73,16 +73,15 @@ class GeneralInfoList extends StatelessWidget {
     return generalInfo
         .map((element) => PageViewModel(
             // TODO: Add theme style
-            title: '',
+            titleWidget: Image.asset(
+              'assets/icons/green_style_white_small.png',
+              width: 200,
+              alignment: Alignment.topCenter,
+            ),
             // body: element.description,
             bodyWidget: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Image.asset(
-                  'assets/icons/green_style_white_small.png',
-                  width: 250,
-                  alignment: Alignment.topCenter,
-                ),
                 buildImage(element.categoryId),
                 const SizedBox(height: 20),
                 Text(
@@ -117,8 +116,6 @@ class GeneralInfoList extends StatelessWidget {
       default:
         break;
     }
-    return Center(
-        // TODO: Create proper widget selection according to category
-        child: imageAsset);
+    return Center(child: imageAsset);
   }
 }

@@ -16,12 +16,6 @@ class _QuestionListState extends State<QuestionList> {
   int? _groupValue;
   int _index = 0;
 
-  @override
-  initState() {
-    _questionsFuture = _getForm();
-    super.initState();
-  }
-
   Future<String?> getUserToken() async {
     const storage = FlutterSecureStorage();
     return await storage.read(key: userTokenKey);
@@ -37,6 +31,12 @@ class _QuestionListState extends State<QuestionList> {
     final data = await questionCtrl.saveForm(await getUserToken(), answers);
 
     return data;
+  }
+
+  @override
+  initState() {
+    _questionsFuture = _getForm();
+    super.initState();
   }
 
   @override
