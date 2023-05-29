@@ -9,11 +9,7 @@ class ForgotPasswordController {
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
-        body: jsonEncode(<String, String>{
-          'email': email
-        }));
-    print(response.statusCode);
-    print(response.body.toString());
+        body: jsonEncode(<String, String>{'email': email}));
     if (response.statusCode != 200) {
       throw Exception('Falha ao solicitar recuperação de senha.');
     }

@@ -34,34 +34,31 @@ class ComparisonChart extends StatelessWidget {
               return Text("Error: ${snapshot.error}");
             } else {
               return DecoratedBox(
-                decoration: BoxDecoration(
-                  color: darkBackgroundColor
-                ),
+                decoration: const BoxDecoration(color: darkBackgroundColor),
                 child: Column(
                   children: [
                     const SizedBox(
                       height: 50,
                     ),
-                    Center(
-                      child: Text( // TODO: Alterar para sugestão buscada da API
+                    const Center(
+                      child: Text(
+                        // TODO: Alterar para sugestão buscada da API
                         'algo',
-                        style: TextStyle(
-                          color: Colors.white
-                        ),
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
                     const SizedBox(
                       height: 30,
                     ),
                     Expanded(
-                      child: DecoratedBox( // Legendas
+                      child: DecoratedBox(
+                        // Legendas
                         decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: const BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0)),
-                          border: Border.all(
-                            style: BorderStyle.none
-                          )
-                        ),
+                            color: Colors.white,
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(20.0),
+                                topRight: Radius.circular(20.0)),
+                            border: Border.all(style: BorderStyle.none)),
                         child: Align(
                           alignment: FractionalOffset.center,
                           child: SizedBox(
@@ -74,21 +71,27 @@ class ComparisonChart extends StatelessWidget {
                                     height: 250,
                                     width: double.infinity,
                                     child: Center(
-                                      child: Co2BarChart(dataList: snapshot.data!.dataList),
+                                      child: Co2BarChart(
+                                          dataList: snapshot.data!.dataList),
                                     ),
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: snapshot.data!.labels.asMap().map<int, Widget>((key, data) {
-                                      final value = Padding(
-                                        padding: const EdgeInsets.only(top: 5, left: 35),
-                                        child: Text(
-                                          data,
-                                          // TODO: Incluir style
-                                        ),
-                                      );
-                                      return MapEntry(key, value);
-                                    }).values.toList(growable: false),
+                                    children: snapshot.data!.labels
+                                        .asMap()
+                                        .map<int, Widget>((key, data) {
+                                          final value = Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 5, left: 35),
+                                            child: Text(
+                                              data,
+                                              // TODO: Incluir style
+                                            ),
+                                          );
+                                          return MapEntry(key, value);
+                                        })
+                                        .values
+                                        .toList(growable: false),
                                   )
                                 ],
                               ),

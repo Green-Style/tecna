@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:green_style/src/constants.dart';
 import 'package:green_style/src/controller/forgotPassword_controller.dart';
-import 'package:green_style/src/controller/register_controller.dart';
 
-TextEditingController _passwordController = TextEditingController();
-TextEditingController _confirmPasswordController = TextEditingController();
 TextEditingController _emailController = TextEditingController();
-TextEditingController _nameController = TextEditingController();
 
 class ForgotPasswordScreen extends StatefulWidget {
+  const ForgotPasswordScreen({super.key});
+
   @override
   _ForgotPasswordScreen createState() => _ForgotPasswordScreen();
 }
 
 class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
-  final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +24,7 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
                 Image.asset(
                   'assets/icons/green_style_white_small.png',
                   width: 155,
-                ),                
+                ),
                 const SizedBox(height: 10),
                 //textfield Email
                 Padding(
@@ -54,7 +50,6 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
                 ),
                 const SizedBox(height: 10),
 
-                
                 //button Register
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -132,9 +127,9 @@ Future<void> _fogotPasswordBtnAction(BuildContext context) async {
                   child: const Text('Ir para Login'))
             ],
           )).then((value) {
-          _emailController.clear();
-          Navigator.of(context).pushNamed('/login');
-          });
+    _emailController.clear();
+    Navigator.of(context).pushNamed('/login');
+  });
 }
 
 bool _validateInputs(BuildContext context) {

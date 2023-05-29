@@ -53,14 +53,19 @@ class HomeController {
     // TODO: Decidir como serao organizadas as barras/labels
     // Forma 1: Atual - Inicial - Global
     dataList = [
-      BarData(initialEmissionColor, json['firstQtyCo2']),
-      BarData(globalEmissionColor, json['globalQtyCo2'])
+      BarData(initialEmissionColor,
+          double.parse(json['firstQtyCo2'].toStringAsFixed(2))),
+      BarData(globalEmissionColor,
+          double.parse(json['globalQtyCo2'].toStringAsFixed(2)))
     ];
 
     labels = ['Inicial', 'Global'];
 
     if (json['lastQtyCo2'] != null) {
-      dataList.insert(0, BarData(actualEmissionColor, json['lastQtyCo2']));
+      dataList.insert(
+          0,
+          BarData(actualEmissionColor,
+              double.parse(json['lastQtyCo2'].toStringAsFixed(2))));
       labels.insert(0, 'Atual');
     }
 
