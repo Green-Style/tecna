@@ -49,6 +49,7 @@ class HomeController {
 
     List<BarData> dataList;
     List<String> labels;
+    String comparison;
 
     // TODO: Decidir como serao organizadas as barras/labels
     // Forma 1: Atual - Inicial - Global
@@ -69,12 +70,27 @@ class HomeController {
       labels.insert(0, 'Atual');
     }
 
+    if (dataList.length == 2) {
+      if (dataList[0].value > dataList[1].value) {
+        comparison = initialMoreThanGlobal.replaceAll('{0}', '${dataList[0].value-dataList[1].value}');
+      } else {
+        comparison = initialLessThanGlobal.replaceAll('{0}', '${dataList[1].value-dataList[0].value}');
+      }
+    } else {
+      if (dataList[0].value > dataList[1].value) {
+        comparison = actualMoreThanInitial.replaceAll('{0}', '${dataList[0].value-dataList[1].value}');
+      } else {
+        comparison = actualLessThanInitial.replaceAll('{0}', '${dataList[1].value-dataList[0].value}');
+      } 
+    }
+
     // Forma 2: Ordem decrescente
-    // TODO: Implementar caso necessario
+    // Implementar caso necessario
 
     return Comparison(
       dataList: dataList,
       labels: labels,
+      comparison: comparison
     );
   }
 
