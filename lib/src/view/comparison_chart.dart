@@ -38,13 +38,16 @@ class ComparisonChart extends StatelessWidget {
                 child: Column(
                   children: [
                     const SizedBox(
-                      height: 50,
+                      height: 10,
                     ),
-                    const Center(
-                      child: Text(
-                        // TODO: Alterar para sugestão buscada da API
-                        'algo',
-                        style: TextStyle(color: Colors.white),
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Text(
+                          // TODO: Alterar para sugestão buscada da API
+                          snapshot.data!.comparison,
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ),
                     const SizedBox(
@@ -75,23 +78,26 @@ class ComparisonChart extends StatelessWidget {
                                           dataList: snapshot.data!.dataList),
                                     ),
                                   ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: snapshot.data!.labels
-                                        .asMap()
-                                        .map<int, Widget>((key, data) {
-                                          final value = Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 5, left: 35),
-                                            child: Text(
-                                              data,
-                                              // TODO: Incluir style
-                                            ),
-                                          );
-                                          return MapEntry(key, value);
-                                        })
-                                        .values
-                                        .toList(growable: false),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 20),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: snapshot.data!.labels
+                                          .asMap()
+                                          .map<int, Widget>((key, data) {
+                                            final value = Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 5, left: 35),
+                                              child: Text(
+                                                data,
+                                                // TODO: Incluir style
+                                              ),
+                                            );
+                                            return MapEntry(key, value);
+                                          })
+                                          .values
+                                          .toList(growable: false),
+                                    ),
                                   )
                                 ],
                               ),
