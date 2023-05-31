@@ -32,10 +32,13 @@ class ChangePasswordScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-            const Text(
-              'Por favor preencha os campos a seguir com atenção!',
-              style: TextStyle(
-                fontSize: 16,
+            const Padding(
+              padding: EdgeInsets.only(top: 8, bottom: 8, right: 20, left: 20),
+              child:  Text(
+                'Por favor, preencha os campos a seguir com atenção!',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
               ),
             ),
             const SizedBox(height: 20),
