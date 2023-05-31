@@ -10,6 +10,11 @@ const String appName = 'Green Style';
 const String apiUrl = 'greenstyle.brazilsouth.cloudapp.azure.com:1337';
 const String userTokenKey = 'greenStyleUserToken';
 
+const String actualMoreThanInitial = 'Parece que seus níveis de emissão aumentaram em {0}kg desde o início da sua jornada.';
+const String actualLessThanInitial = 'Desde que começou a usar o Green Style, seus níveis de emissão caíram em {0}kg!';
+const String initialMoreThanGlobal = 'Parece que você emite {0}kg a mais que a média global!';
+const String initialLessThanGlobal = 'Seus níveis de emissão são aproximadamente {0}kg mais baixos que a média global!';
+
 // Colors
 const Color lightBackgroundColor = Colors.white;
 const Color borderColor = Colors.black;
