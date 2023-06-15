@@ -2,7 +2,7 @@
     package="com.example.green_style">
    <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="green_style"
+        android:label="Green Style"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
