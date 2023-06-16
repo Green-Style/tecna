@@ -44,9 +44,9 @@ class ComparisonChart extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: Text(
-                          // TODO: Alterar para sugestão buscada da API
                           snapshot.data!.comparison,
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
+                          textAlign: TextAlign.center,
                         ),
                       ),
                     ),
