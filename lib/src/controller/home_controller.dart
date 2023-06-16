@@ -51,41 +51,31 @@ class HomeController {
     List<String> labels;
     String comparison;
 
-    // TODO: Decidir como serao organizadas as barras/labels
-    // Forma 1: Atual - Inicial - Global
     dataList = [
+      BarData(actualEmissionColor,
+          double.parse(json['lastQtyCo2'].toStringAsFixed(2))),
       BarData(initialEmissionColor,
           double.parse(json['firstQtyCo2'].toStringAsFixed(2))),
       BarData(globalEmissionColor,
           double.parse(json['globalQtyCo2'].toStringAsFixed(2)))
     ];
 
-    labels = ['Inicial', 'Global'];
+    labels = ['Atual', 'Inicial', 'Global'];
 
-    if (json['lastQtyCo2'] != null) {
-      dataList.insert(
-          0,
-          BarData(actualEmissionColor,
-              double.parse(json['lastQtyCo2'].toStringAsFixed(2))));
-      labels.insert(0, 'Atual');
-    }
-
-    if (dataList.length == 2) {
-      if (dataList[0].value > dataList[1].value) {
-        comparison = initialMoreThanGlobal.replaceAll('{0}', '${dataList[0].value-dataList[1].value}');
+    
+    if (dataList[0].value == dataList[1].value) {
+      if (dataList[1].value > dataList[2].value) {
+        comparison = initialMoreThanGlobal.replaceAll('{0}', (dataList[0].value-dataList[1].value).toStringAsFixed(2));
       } else {
-        comparison = initialLessThanGlobal.replaceAll('{0}', '${dataList[1].value-dataList[0].value}');
+        comparison = initialLessThanGlobal.replaceAll('{0}', (dataList[1].value-dataList[0].value).toStringAsFixed(2));
       }
     } else {
       if (dataList[0].value > dataList[1].value) {
-        comparison = actualMoreThanInitial.replaceAll('{0}', '${dataList[0].value-dataList[1].value}');
+        comparison = actualMoreThanInitial.replaceAll('{0}', (dataList[0].value-dataList[1].value).toStringAsFixed(2));
       } else {
-        comparison = actualLessThanInitial.replaceAll('{0}', '${dataList[1].value-dataList[0].value}');
+        comparison = actualLessThanInitial.replaceAll('{0}', (dataList[1].value-dataList[0].value).toStringAsFixed(2));
       } 
     }
-
-    // Forma 2: Ordem decrescente
-    // Implementar caso necessario
 
     return Comparison(
       dataList: dataList,
