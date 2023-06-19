@@ -65,9 +65,9 @@ class HomeController {
     
     if (dataList[0].value == dataList[1].value) {
       if (dataList[1].value > dataList[2].value) {
-        comparison = initialMoreThanGlobal.replaceAll('{0}', (dataList[0].value-dataList[1].value).toStringAsFixed(2));
+        comparison = initialMoreThanGlobal.replaceAll('{0}', (dataList[1].value-dataList[2].value).toStringAsFixed(2));
       } else {
-        comparison = initialLessThanGlobal.replaceAll('{0}', (dataList[1].value-dataList[0].value).toStringAsFixed(2));
+        comparison = initialLessThanGlobal.replaceAll('{0}', (dataList[2].value-dataList[1].value).toStringAsFixed(2));
       }
     } else {
       if (dataList[0].value > dataList[1].value) {
