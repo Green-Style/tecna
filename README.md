@@ -1,30 +1,31 @@
-# green_style
+# Green Style
 
-A new Flutter project.
+Uma aplicação criada com o objetivo de
+conscientizar o usuário sobre o
+meio-ambiente, que recebe informações
+do usuário para realizar o cálculo de
+sua emissão de gás carbônico e sugerir
+práticas de acordo.
 
-## Getting Started
+## Como rodar
+Para rodar a aplicação, pode ser usado o
+Android Studio, VS Code ou outra IDE,
+desde que se tenha o `flutter` instalado.
 
-This project is a starting point for a Flutter application.
+Após instalar as dependências do flutter
+e garantir que não se tenham erros com o
+comando `flutter doctor`, deve-se, na
+pasta do projeto, rodar `flutter pug get`
+para realizar o download das bibliotecas.
 
-A few resources to get you started if this is your first Flutter project:
+Com `flutter run` se roda a aplicação.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Como gerar arquivos APK
+Ao rodar o comando
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+$ flutter build apk --split-per-abi
+```
 
-## Padrão para commit
-Descrição + (Nº US + Nº task)
-
-Ex: `Implementação da tela inicial (#20, #38)`
-
-## Padrão para branches
-Develop/N°US/Descrição
-
-Ex: `Develop/20/TelaInicial`
-
-Feature/N°US/Nome/DescriçaoDaTask
-
-Ex: `Feature/20/Bruno/CriarEstrutura`
+serão gerados os apks para armeabi-v7a, arm64-v8a
+e x86_64.
